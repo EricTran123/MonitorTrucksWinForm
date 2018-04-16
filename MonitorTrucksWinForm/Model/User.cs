@@ -11,16 +11,11 @@ namespace WindowsFormsAppTest.Model
 {
     class User
     {
-        public String username { get; set; }
-        public String password { get; set; }
+        public ObjectId Id { get; set; }
+        public String userName { get; set; }
+        public String passWord { get; set; }
         public String createDate { get; set; }
 
-        //public User(String user, String password, String createDate)
-        //{
-        //    this.userName = user;
-        //    this.password = password;
-        //    this.createDate = createDate;
-        //}
         public String getMD5(String password)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
@@ -34,15 +29,17 @@ namespace WindowsFormsAppTest.Model
             return stringBuilder.ToString();
         }
 
-        //public User findUserByName (String userName, IMongoDatabase mongoDatabase)
-        //{
-        //    var collection = mongoDatabase.GetCollection<User>("users");
-        //    var foundUser = collection.Find(x => x.username == userName).FirstOrDefault();
-        //    return foundUser.ToBson;
-        //}
-
-
+        public User findUserByName(String userName, IMongoDatabase mongoDatabase)
+        {
+            var collection = mongoDatabase.GetCollection<User>("users");
+            return collection.Find(x => x.userName == userName).FirstOrDefault();
+        }
+        public List<User> getListAllUsers (IMongoDatabase mongoDatabase)
+        {
+            var collection = mongoDatabase.GetCollection<User> ("users");
+            return collection.Find(x => String.IsNullOrEmpty(x.userName)).ToList();
+        }
     }
-    
-   
+
+
 }

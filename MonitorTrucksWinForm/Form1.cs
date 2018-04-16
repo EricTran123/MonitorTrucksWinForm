@@ -18,13 +18,13 @@ namespace WindowsFormsAppTest
         public Form1()
         {
             InitializeComponent();
-        
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             Console.WriteLine("Open form 1");
-        
+
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -34,18 +34,20 @@ namespace WindowsFormsAppTest
 
         private void Login_Click(object sender, EventArgs e)
         {
-            String userName = txtUserName.Text;
-            String passWord = txtPassword.Text;
 
-            if (String.IsNullOrEmpty(userName) && String.IsNullOrEmpty(passWord))
+            String username = txtUserName.Text;
+            String password = txtPassword.Text;
+
+            if (String.IsNullOrEmpty(username) && String.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Please enter your username and passowrd.", "Message");
             }
-            else if (String.IsNullOrEmpty(userName))
+            else if (String.IsNullOrEmpty(username))
             {
                 MessageBox.Show("Please enter your username.", "Message");
+
             }
-            else if (String.IsNullOrEmpty(passWord))
+            else if (String.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Please enter your passowrd.", "Message");
             }
@@ -55,51 +57,31 @@ namespace WindowsFormsAppTest
                 var connectionString = "mongodb://danangxp:danang123@ds143099.mlab.com:43099/truckmonitoring";
                 var mongoClient = mongoDBConnection.getMongoClient(connectionString);
                 var database = mongoClient.GetDatabase("truckmonitoring");
-                var collection = database.GetCollection<User>("users");
+                
                 User loginUser = new User();
-                loginUser.username = userName;
-                loginUser.password = passWord;
-                //  var dbUser =  collection.Find(user => user.username, loginUser.username);
-                Console.WriteLine(loginUser.username);
-                var list = collection.Find(x => x.username == loginUser.username).FirstOrDefault();
-                Console.WriteLine(list.createDate);
-
-                Console.WriteLine("THANHF CONF");
-                this.Hide();
-                var form = new Form2();
-                form.Show();
-
+                loginUser = loginUser.findUserByName(username, database);
+                if (null != loginUser)
+                {
+                    if (loginUser.passWord.Equals(loginUser.getMD5(password)))
+                    {
+                        Console.WriteLine(loginUser.userName);
+                        this.Hide();
+                        var form = new Form2();
+                        form.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Your password is incorrect. Please try again.", "Message");
+                        txtPassword.Clear();
+                        var collection = database.GetCollection<User>("users");
+                    }
+                }
+                else { MessageBox.Show("Your username is incorrect. Please try again.", "Message");
+                    txtUserName.Clear();
+                    txtPassword.Clear();
+                };
             }
-            //MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
-            //var connectionString = "mongodb://danangxp:danang123@ds143099.mlab.com:43099/truckmonitoring";
-            //var mongoClient = mongoDBConnection.getMongoClient(connectionString);
-            //var database = mongoClient.GetDatabase("truckmonitoring");
-            //User user = new User()
-            //{
-            //    userName = "QA",
-            //    password = "123456",
-            //    createDate = DateTime.UtcNow.ToString("yyyyMMdd-HHMMss"),
-               
-            //};
-            //user.password = user.getMD5("123456");
-            //var collection = database.GetCollection<User>("users");
-            //collection.InsertOne(user);
-            //Console.WriteLine(database);
-            
-            //if (txtUserName.Text.Equals("QA") && txtPassword.Text.Equals("123456"))
-            //{
-            //    Console.WriteLine("THANHF CONF");
-            //    this.Hide();
-            //    var form = new Form2();
-            //    form.Show();
-               
-            //} else if (txtUserName.Text.Equals("") && txtPassword.Text.Equals("")){
-            //    MessageBox.Show("Please enter your username and passowrd","Message");
-            //} else if (txtUserName.Text.Equals("")) {
 
-            //} else if (txtPassword.Text.Equals("")){
-
-            //}
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
