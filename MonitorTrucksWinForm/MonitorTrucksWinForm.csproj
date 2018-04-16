@@ -90,7 +90,7 @@
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\User.cs" />
-    <Compile Include="Model\OrderTrucks.cs" />
+    <Compile Include="Model\OrderTruck.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

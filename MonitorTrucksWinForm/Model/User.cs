@@ -16,6 +16,9 @@ namespace WindowsFormsAppTest.Model
         public String passWord { get; set; }
         public String createDate { get; set; }
 
+        /*
+         Crypyt the password field.
+        */
         public String getMD5(String password)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
@@ -28,16 +31,26 @@ namespace WindowsFormsAppTest.Model
             }
             return stringBuilder.ToString();
         }
-
+        /*
+         Find user by username field.
+        */
         public User findUserByName(String userName, IMongoDatabase mongoDatabase)
         {
             var collection = mongoDatabase.GetCollection<User>("users");
             return collection.Find(x => x.userName == userName).FirstOrDefault();
         }
-        public List<User> getListAllUsers (IMongoDatabase mongoDatabase)
+        /*
+         Get list of users.
+        */
+        public List<User> getListAllUsers(IMongoDatabase mongoDatabase)
         {
-            var collection = mongoDatabase.GetCollection<User> ("users");
-            return collection.Find(x => String.IsNullOrEmpty(x.userName)).ToList();
+            var collection = mongoDatabase.GetCollection<User>("users");
+            return collection.Find(x => !String.IsNullOrEmpty(x.userName)).SortBy(x => x.userName).ToList();
+        }
+        public void deleteUser (IMongoDatabase mongoDatabase, String id)
+        {
+            var collection = mongoDatabase.GetCollection<User>("users");
+            collection.FindOneAndDeleteAsync(x => x.Id.Equals(id));
         }
     }
 

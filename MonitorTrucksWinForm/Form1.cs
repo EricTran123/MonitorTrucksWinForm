@@ -35,8 +35,9 @@ namespace WindowsFormsAppTest
         private void Login_Click(object sender, EventArgs e)
         {
 
-            String username = txtUserName.Text;
-            String password = txtPassword.Text;
+            String username = txtUserName.Text.Trim();
+            String password = txtPassword.Text.Trim();
+           
 
             if (String.IsNullOrEmpty(username) && String.IsNullOrEmpty(password))
             {
@@ -53,33 +54,46 @@ namespace WindowsFormsAppTest
             }
             else
             {
-                MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
-                var connectionString = "mongodb://danangxp:danang123@ds143099.mlab.com:43099/truckmonitoring";
-                var mongoClient = mongoDBConnection.getMongoClient(connectionString);
-                var database = mongoClient.GetDatabase("truckmonitoring");
-                
-                User loginUser = new User();
-                loginUser = loginUser.findUserByName(username, database);
-                if (null != loginUser)
+                MongoDBConnection mongoDBConnection = null;
+                try
                 {
-                    if (loginUser.passWord.Equals(loginUser.getMD5(password)))
+                    mongoDBConnection = MongoDBConnection.getMongoConnection;
+                    Console.WriteLine(mongoDBConnection);
+                    var connectionString = "mongodb://danangxp:danang123@ds143099.mlab.com:43099/truckmonitoring";
+                    var mongoClient = mongoDBConnection.getMongoClient(connectionString);
+                    var database = mongoClient.GetDatabase("truckmonitoring");
+
+                    User loginUser = new User();
+                    loginUser = loginUser.findUserByName(username, database);
+                    if (null != loginUser)
                     {
-                        Console.WriteLine(loginUser.userName);
-                        this.Hide();
-                        var form = new Form2();
-                        form.Show();
+                        if (loginUser.passWord.Equals(loginUser.getMD5(password)))
+                        {
+                            Console.WriteLine(loginUser.Id);
+                            Console.WriteLine(loginUser.getListAllUsers(database).Count());
+                            this.Hide();
+                            var form = new Form2();
+                            form.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Your password is incorrect. Please try again.", "Message");
+                            txtPassword.Clear();
+                            var collection = database.GetCollection<User>("users");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Your password is incorrect. Please try again.", "Message");
+                        MessageBox.Show("Your username is incorrect. Please try again.", "Message");
+                        txtUserName.Clear();
                         txtPassword.Clear();
-                        var collection = database.GetCollection<User>("users");
-                    }
-                }
-                else { MessageBox.Show("Your username is incorrect. Please try again.", "Message");
-                    txtUserName.Clear();
-                    txtPassword.Clear();
-                };
+                    };
+                } catch(TimeoutException e1)
+                {
+                    MessageBox.Show("Please check your connection again.", "Message");
+                    Console.WriteLine(e1.ToString());
+                }             
+                
             }
 
         }
@@ -93,6 +107,11 @@ namespace WindowsFormsAppTest
         {
             Form1 form1 = new Form1();
 
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            txtPassword.PasswordChar = '\u25CF';
         }
     }
 }
