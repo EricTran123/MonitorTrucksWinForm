@@ -59,8 +59,7 @@ namespace WindowsFormsAppTest
                 {
                     mongoDBConnection = MongoDBConnection.getMongoConnection;
                     Console.WriteLine(mongoDBConnection);
-                    var connectionString = "mongodb://danangxp:danang123@ds143099.mlab.com:43099/truckmonitoring";
-                    IMongoDatabase mongoDatabase = mongoDBConnection.getMongoData(connectionString);
+                    IMongoDatabase mongoDatabase = mongoDBConnection.getMongoData();
 
                     User loginUser = new User();
                     //{

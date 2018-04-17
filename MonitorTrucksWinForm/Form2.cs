@@ -8,25 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsAppTest.Model;
+using MongoDB.Driver;
+using WindowsFormsAppTest.Database;
 
 namespace WindowsFormsAppTest
 {
     public partial class Form2 : Form
     {
-        public string username { get; set; }
-        public string password { get; set; }
+       
 
         public Form2()
         {
             InitializeComponent();
+            Console.WriteLine(dataGridViewUser.ColumnCount);
         }
 
-        public Form2(string username, string password)
-        {
-            InitializeComponent();
-            this.username = username;
-            this.password = password;
-        }
 
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -35,6 +31,8 @@ namespace WindowsFormsAppTest
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
+            // this.displayDataTableUser(dataGridViewUser);
+            Console.WriteLine(dataGridViewUser.ColumnCount);
 
         }
 
@@ -67,11 +65,22 @@ namespace WindowsFormsAppTest
         {
 
         }
-        public void displayDataTableUser()
+        public void displayDataTableUser(DataGridView dataGridView)
         {
             User userData = new User();
             DataTable dataTable = new DataTable();
-            dataTable = userData.getListAllUsers()
+            MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
+            List<User> listUsers = userData.getListAllUsers(mongoDBConnection.getMongoData());
+ 
+            for (int i = 1; i < listUsers.Count() + 1; i++)
+            {
+                
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -31,13 +31,13 @@ namespace WindowsFormsAppTest.Database
                 return mongoDBConnection;
             }
         }
-        public IMongoDatabase getMongoData(String connectionString)
+        public IMongoDatabase getMongoData()
         {
             if (mongoDatabase == null)
             {
                 try
                 {
-                    MongoClient mongoClient = new MongoClient(connectionString);
+                    MongoClient mongoClient = new MongoClient("mongodb://danangxp:danang123@ds143099.mlab.com:43099/truckmonitoring");
                     return mongoClient.GetDatabase("truckmonitoring");
                 }
                 catch (MongoClientException e)

@@ -30,31 +30,31 @@
         {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabUser = new System.Windows.Forms.TabPage();
-            this.tabCustomer = new System.Windows.Forms.TabPage();
-            this.tabOrderTruck = new System.Windows.Forms.TabPage();
-            this.tabTruck = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dataGridViewUser = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.tabCustomer = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tabOrderTruck = new System.Windows.Forms.TabPage();
+            this.tabTruck = new System.Windows.Forms.TabPage();
             this.tabControl.SuspendLayout();
             this.tabUser.SuspendLayout();
-            this.tabCustomer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUser)).BeginInit();
+            this.tabCustomer.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -63,7 +63,7 @@
             this.tabControl.Controls.Add(this.tabCustomer);
             this.tabControl.Controls.Add(this.tabOrderTruck);
             this.tabControl.Controls.Add(this.tabTruck);
-            this.tabControl.Location = new System.Drawing.Point(-3, 0);
+            this.tabControl.Location = new System.Drawing.Point(-2, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1042, 574);
@@ -73,7 +73,7 @@
             // 
             this.tabUser.Controls.Add(this.groupBox2);
             this.tabUser.Controls.Add(this.groupBox1);
-            this.tabUser.Controls.Add(this.dataGridView1);
+            this.tabUser.Controls.Add(this.dataGridViewUser);
             this.tabUser.Location = new System.Drawing.Point(4, 22);
             this.tabUser.Name = "tabUser";
             this.tabUser.Padding = new System.Windows.Forms.Padding(3);
@@ -83,53 +83,17 @@
             this.tabUser.UseVisualStyleBackColor = true;
             this.tabUser.Click += new System.EventHandler(this.tabPage1_Click);
             // 
-            // tabCustomer
+            // groupBox2
             // 
-            this.tabCustomer.Controls.Add(this.groupBox3);
-            this.tabCustomer.Location = new System.Drawing.Point(4, 22);
-            this.tabCustomer.Name = "tabCustomer";
-            this.tabCustomer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCustomer.Size = new System.Drawing.Size(1034, 548);
-            this.tabCustomer.TabIndex = 1;
-            this.tabCustomer.Text = "Customers";
-            this.tabCustomer.UseVisualStyleBackColor = true;
-            this.tabCustomer.Click += new System.EventHandler(this.tabPage2_Click);
-            // 
-            // tabOrderTruck
-            // 
-            this.tabOrderTruck.Location = new System.Drawing.Point(4, 22);
-            this.tabOrderTruck.Name = "tabOrderTruck";
-            this.tabOrderTruck.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOrderTruck.Size = new System.Drawing.Size(1034, 548);
-            this.tabOrderTruck.TabIndex = 2;
-            this.tabOrderTruck.Text = "OrderTrucks";
-            this.tabOrderTruck.UseVisualStyleBackColor = true;
-            this.tabOrderTruck.Click += new System.EventHandler(this.tabPage3_Click);
-            // 
-            // tabTruck
-            // 
-            this.tabTruck.Location = new System.Drawing.Point(4, 22);
-            this.tabTruck.Name = "tabTruck";
-            this.tabTruck.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTruck.Size = new System.Drawing.Size(1034, 548);
-            this.tabTruck.TabIndex = 3;
-            this.tabTruck.Text = "tabPage4";
-            this.tabTruck.UseVisualStyleBackColor = true;
-            this.tabTruck.Click += new System.EventHandler(this.tabPage4_Click);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.UserName,
-            this.CreateDate,
-            this.Active});
-            this.dataGridView1.Location = new System.Drawing.Point(95, 243);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(804, 287);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.groupBox2.Controls.Add(this.btnAdd);
+            this.groupBox2.Controls.Add(this.btnUpdate);
+            this.groupBox2.Controls.Add(this.btnDelete);
+            this.groupBox2.Location = new System.Drawing.Point(95, 155);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(672, 82);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Actions";
             // 
             // btnAdd
             // 
@@ -139,6 +103,7 @@
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnUpdate
             // 
@@ -158,6 +123,20 @@
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblUsername);
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.txtPassword);
+            this.groupBox1.Controls.Add(this.txtUserName);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(95, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(672, 143);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "User";
             // 
             // lblUsername
             // 
@@ -179,6 +158,13 @@
             this.checkBox1.Text = "Active";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // txtPassword
+            // 
+            this.txtPassword.Location = new System.Drawing.Point(154, 74);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(100, 20);
+            this.txtPassword.TabIndex = 8;
+            // 
             // txtUserName
             // 
             this.txtUserName.Location = new System.Drawing.Point(154, 28);
@@ -195,47 +181,19 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Password";
             // 
-            // txtPassword
+            // dataGridViewUser
             // 
-            this.txtPassword.Location = new System.Drawing.Point(154, 74);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(100, 20);
-            this.txtPassword.TabIndex = 8;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.lblUsername);
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.txtPassword);
-            this.groupBox1.Controls.Add(this.txtUserName);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(95, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(672, 143);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "User";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnAdd);
-            this.groupBox2.Controls.Add(this.btnUpdate);
-            this.groupBox2.Controls.Add(this.btnDelete);
-            this.groupBox2.Location = new System.Drawing.Point(95, 155);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(672, 82);
-            this.groupBox2.TabIndex = 10;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Actions";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Location = new System.Drawing.Point(221, 38);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(490, 216);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Customer";
+            this.dataGridViewUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.UserName,
+            this.CreateDate,
+            this.Active});
+            this.dataGridViewUser.Location = new System.Drawing.Point(95, 243);
+            this.dataGridViewUser.Name = "dataGridViewUser";
+            this.dataGridViewUser.Size = new System.Drawing.Size(804, 287);
+            this.dataGridViewUser.TabIndex = 0;
+            this.dataGridViewUser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // ID
             // 
@@ -260,6 +218,49 @@
             this.Active.HeaderText = "Active";
             this.Active.Name = "Active";
             // 
+            // tabCustomer
+            // 
+            this.tabCustomer.Controls.Add(this.groupBox3);
+            this.tabCustomer.Location = new System.Drawing.Point(4, 22);
+            this.tabCustomer.Name = "tabCustomer";
+            this.tabCustomer.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCustomer.Size = new System.Drawing.Size(1034, 548);
+            this.tabCustomer.TabIndex = 1;
+            this.tabCustomer.Text = "Customers";
+            this.tabCustomer.UseVisualStyleBackColor = true;
+            this.tabCustomer.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Location = new System.Drawing.Point(221, 38);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(490, 216);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Customer";
+            // 
+            // tabOrderTruck
+            // 
+            this.tabOrderTruck.Location = new System.Drawing.Point(4, 22);
+            this.tabOrderTruck.Name = "tabOrderTruck";
+            this.tabOrderTruck.Padding = new System.Windows.Forms.Padding(3);
+            this.tabOrderTruck.Size = new System.Drawing.Size(1034, 548);
+            this.tabOrderTruck.TabIndex = 2;
+            this.tabOrderTruck.Text = "OrderTrucks";
+            this.tabOrderTruck.UseVisualStyleBackColor = true;
+            this.tabOrderTruck.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // tabTruck
+            // 
+            this.tabTruck.Location = new System.Drawing.Point(4, 22);
+            this.tabTruck.Name = "tabTruck";
+            this.tabTruck.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTruck.Size = new System.Drawing.Size(1034, 548);
+            this.tabTruck.TabIndex = 3;
+            this.tabTruck.Text = "tabPage4";
+            this.tabTruck.UseVisualStyleBackColor = true;
+            this.tabTruck.Click += new System.EventHandler(this.tabPage4_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,11 +273,11 @@
             this.Load += new System.EventHandler(this.Form2_Load);
             this.tabControl.ResumeLayout(false);
             this.tabUser.ResumeLayout(false);
-            this.tabCustomer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUser)).EndInit();
+            this.tabCustomer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -288,7 +289,7 @@
         private System.Windows.Forms.TabPage tabCustomer;
         private System.Windows.Forms.TabPage tabOrderTruck;
         private System.Windows.Forms.TabPage tabTruck;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewUser;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Button btnDelete;
