@@ -12,7 +12,7 @@ namespace WindowsFormsAppTest.Database
     {
         private static volatile MongoDBConnection mongoDBConnection;
         private static object syncLock = new Object();
-        private MongoClient mongoClient = null;
+        private IMongoDatabase mongoDatabase = null;
 
         private MongoDBConnection() { }
         public static MongoDBConnection getMongoConnection
@@ -31,21 +31,22 @@ namespace WindowsFormsAppTest.Database
                 return mongoDBConnection;
             }
         }
-        public MongoClient getMongoClient(String connectionString)
+        public IMongoDatabase getMongoData(String connectionString)
         {
-            if (mongoClient == null)
+            if (mongoDatabase == null)
             {
                 try
                 {
-                    mongoClient = new MongoClient(connectionString);
+                    MongoClient mongoClient = new MongoClient(connectionString);
+                    return mongoClient.GetDatabase("truckmonitoring");
                 }
                 catch (MongoClientException e)
                 {
-                    mongoClient = null;
+                    mongoDatabase = null;
                 }
 
             }
-            return mongoClient;
+            return mongoDatabase;
         }
        
 

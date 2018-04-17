@@ -60,17 +60,21 @@ namespace WindowsFormsAppTest
                     mongoDBConnection = MongoDBConnection.getMongoConnection;
                     Console.WriteLine(mongoDBConnection);
                     var connectionString = "mongodb://danangxp:danang123@ds143099.mlab.com:43099/truckmonitoring";
-                    var mongoClient = mongoDBConnection.getMongoClient(connectionString);
-                    var database = mongoClient.GetDatabase("truckmonitoring");
+                    IMongoDatabase mongoDatabase = mongoDBConnection.getMongoData(connectionString);
 
                     User loginUser = new User();
-                    loginUser = loginUser.findUserByName(username, database);
+                    //{
+                    //    userName = "QA1",
+                    //    passWord = "123456",
+                    //    createDate = DateTime.Now.ToUniversalTime()
+                    //};
+                    loginUser = loginUser.findUserByName(username, mongoDatabase);
                     if (null != loginUser)
                     {
                         if (loginUser.passWord.Equals(loginUser.getMD5(password)))
                         {
-                            Console.WriteLine(loginUser.Id);
-                            Console.WriteLine(loginUser.getListAllUsers(database).Count());
+                            Console.WriteLine(loginUser.createDate.ToLocalTime().ToString());
+
                             this.Hide();
                             var form = new Form2();
                             form.Show();
@@ -79,7 +83,6 @@ namespace WindowsFormsAppTest
                         {
                             MessageBox.Show("Your password is incorrect. Please try again.", "Message");
                             txtPassword.Clear();
-                            var collection = database.GetCollection<User>("users");
                         }
                     }
                     else

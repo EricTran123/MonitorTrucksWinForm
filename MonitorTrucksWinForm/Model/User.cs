@@ -14,7 +14,7 @@ namespace WindowsFormsAppTest.Model
         public ObjectId Id { get; set; }
         public String userName { get; set; }
         public String passWord { get; set; }
-        public String createDate { get; set; }
+        public DateTime createDate { get; set; }
 
         /*
          Crypyt the password field.

@@ -17,7 +17,7 @@ namespace WindowsFormsAppTest.Model
         public String materialType { get; set; }
         public int subtotal { get; set; }
         public String note { get; set; }
-        public String createDate { get; set; }
+        public DateTime createDate { get; set; }
         public String modifyDate { get; set; }
 
         public List<OrderTruck> filterOrderbyDriverName (String driverName, IMongoDatabase mongoDatabase )
@@ -29,8 +29,20 @@ namespace WindowsFormsAppTest.Model
         {
             if (startDate <= endDate)
             {
-
+                var collection = mongoDatabase.GetCollection<OrderTruck>("ordertrucks");
+                return collection.Find(x => (x.createDate >= startDate && x.createDate <= endDate)).ToList();
+            } else
+            {
                 return null;
+            }
+        }
+
+        public List<OrderTruck> filterByMaterialType(String materialType, IMongoDatabase mongoDatabase)
+        {
+            if (materialType != null)
+            {
+                var collection = mongoDatabase.GetCollection<OrderTruck>("ordertrucks");
+                return collection.Find(x => x.materialType.Equals(materialType)).ToList();
             } else
             {
                 return null;
