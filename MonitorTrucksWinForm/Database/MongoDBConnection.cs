@@ -10,7 +10,7 @@ namespace WindowsFormsAppTest.Database
 {
     class MongoDBConnection
     {
-        private static volatile MongoDBConnection mongoDBConnection;
+        public static volatile MongoDBConnection mongoDBConnection;
         private static object syncLock = new Object();
         private IMongoDatabase mongoDatabase = null;
 
@@ -40,7 +40,7 @@ namespace WindowsFormsAppTest.Database
                     MongoClient mongoClient = new MongoClient("mongodb://danangxp:danang123@ds143099.mlab.com:43099/truckmonitoring");
                     return mongoClient.GetDatabase("truckmonitoring");
                 }
-                catch (MongoClientException e)
+                catch (MongoClientException)
                 {
                     mongoDatabase = null;
                 }

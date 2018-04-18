@@ -15,6 +15,7 @@ namespace WindowsFormsAppTest.Model
         public String userName { get; set; }
         public String passWord { get; set; }
         public DateTime createDate { get; set; }
+        public bool active { get; set; }
 
         /*
          Crypyt the password field.
@@ -47,10 +48,26 @@ namespace WindowsFormsAppTest.Model
             var collection = mongoDatabase.GetCollection<User>("users");
             return collection.Find(x => !String.IsNullOrEmpty(x.userName)).SortBy(x => x.userName).ToList();
         }
-        public void deleteUser (IMongoDatabase mongoDatabase, String id)
+        /*
+         Delete user
+        */
+        public void deleteUser(IMongoDatabase mongoDatabase, String id)
         {
             var collection = mongoDatabase.GetCollection<User>("users");
             collection.FindOneAndDeleteAsync(x => x.Id.Equals(id));
+        }
+
+        public void addUser(IMongoDatabase mongoDatabase, User newUser)
+        {
+            try
+            {
+                var collection = mongoDatabase.GetCollection<User>("users");
+                collection.InsertOneAsync(newUser);
+            } catch (Exception e)
+            {
+                throw e;
+            }
+           
         }
     }
 

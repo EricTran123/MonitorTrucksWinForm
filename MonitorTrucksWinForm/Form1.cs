@@ -72,11 +72,20 @@ namespace WindowsFormsAppTest
                     {
                         if (loginUser.passWord.Equals(loginUser.getMD5(password)))
                         {
-                            Console.WriteLine(loginUser.createDate.ToLocalTime().ToString());
+                            if (!loginUser.active)
+                            {
+                                MessageBox.Show("Your username is inactive. Please try again.", "Message");
+                                txtUserName.Clear();
+                                txtPassword.Clear();
+                            } else
+                            {
+                                Console.WriteLine(loginUser.createDate.ToLocalTime().ToString());
 
-                            this.Hide();
-                            var form = new Form2();
-                            form.Show();
+                                this.Hide();
+                                var form = new Form2();
+                                form.Show();
+                            }
+                            
                         }
                         else
                         {
