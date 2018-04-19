@@ -119,15 +119,22 @@ namespace WindowsFormsAppTest
 
         private void dataGridViewUser_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Console.WriteLine(e.RowIndex);
-            if (e.RowIndex > 0)
+
+            if (e.RowIndex >= 0)
             {
                 var gird = dataGridViewUser.Rows[e.RowIndex];
-                Console.WriteLine(gird.Cells[0].Value);
-                Console.WriteLine(gird.Cells[1].Value);
-                Console.WriteLine(gird.Cells[3].Value); 
-                dataGridViewUser.Update();
-                dataGridViewUser.Refresh();
+                txtUserName.Text = dataGridViewUser.Rows[e.RowIndex].Cells[1].Value.ToString();
+                txtPassword.Text = dataGridViewUser.Rows[e.RowIndex].Cells[2].Value.ToString();
+                ckcActive.Checked = Convert.ToBoolean(dataGridViewUser.Rows[e.RowIndex].Cells[4].Value.ToString());
+                txtUserName.Enabled = false;
+
+               // Console.WriteLine(gird.Cells[0].Value);
+                 //Console.WriteLine(gird.Cells[1].Value);
+                //Console.WriteLine(gird.Cells[2].Value);
+              //  Console.WriteLine(gird.Cells[3].Value); 
+                // dataGridViewUser.Update();
+               //  dataGridViewUser.Refresh();
+              //  Console.WriteLine(e.RowIndex);
             }
         }
 
@@ -149,6 +156,96 @@ namespace WindowsFormsAppTest
         private void ckcActive_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(txtUserName.Text.Trim()))
+            {
+
+                DialogResult dr = MessageBox.Show("Do you want to update this user?", "Confirmed Message", MessageBoxButtons.YesNoCancel,
+                  MessageBoxIcon.Information);
+
+                if (dr == DialogResult.Yes)
+                {
+                    MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
+                    User deleteUser = new User();
+                    try
+                    {
+                        deleteUser.deleteByUsername(mongoDBConnection.getMongoData(), txtUserName.Text.Trim());
+                        MessageBox.Show("The user is deleted successfully.", "Message");
+                        txtUserName.Clear();
+                        txtPassword.Clear();
+                        if (ckcActive.Checked)
+                        {
+                            ckcActive.Checked = false;
+                        }
+                        txtUserName.Enabled = true;
+                        this.displayDataTableUser(dataGridViewUser);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Failed to delete this user. Please try again.", "Message");
+                    }
+                }
+               
+            } else
+            {
+                MessageBox.Show("Please select the user to delete.", "Message");
+            }
+            
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+
+            String username = txtUserName.Text.Trim();
+            String password = txtPassword.Text.Trim();
+            if (String.IsNullOrEmpty(username) && String.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Please enter your username and passowrd.", "Message");
+            }
+            else if (String.IsNullOrEmpty(username))
+            {
+                MessageBox.Show("Please enter your username.", "Message");
+
+            }
+            else if (String.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Please enter your passowrd.", "Message");
+            } else
+            {
+                DialogResult dr = MessageBox.Show("Do you want to update this user?", "Confirmed Message", MessageBoxButtons.YesNoCancel,
+                  MessageBoxIcon.Information);
+
+                if (dr == DialogResult.Yes)
+                {
+                    MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
+                    User currentUser = new User();
+                    try
+                    {
+
+                        currentUser = currentUser.findUserByName(username, mongoDBConnection.getMongoData());
+                        User newUser = new User();
+                        newUser.passWord = password;
+                        newUser.active = ckcActive.Checked;
+                        currentUser.updateUser(mongoDBConnection.getMongoData(), currentUser, newUser);
+                        MessageBox.Show("The user is updated successfully.", "Message");
+                        txtUserName.Clear();
+                        txtPassword.Clear();
+                        if (ckcActive.Checked)
+                        {
+                            ckcActive.Checked = false;
+                        }
+                        txtUserName.Enabled = true;
+                        this.displayDataTableUser(dataGridViewUser);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Failed to update this user. Please try again.", "Message");
+                    }
+                }
+            }
         }
     }
 }

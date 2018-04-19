@@ -10,14 +10,17 @@ namespace WindowsFormsAppTest
 {
     class Customer
     {
-        public ObjectId id { get; set; }
+        public ObjectId _id { get; set; }
         public String name { get; set; }
-        public String address { get; set; }
         public String phoneNumber { get; set; }
+        public String address { get; set; }
         public Boolean isActive { get; set; }
         public String createDate { get; set; }
         public String modifyDate { get; set; }
-
+        public Customer()
+        {
+            isActive = false;
+        }
         public List<Customer> getAllActiveCustomers (IMongoDatabase mongoDatabase)
         {
             var collection = mongoDatabase.GetCollection<Customer>("customers");
@@ -26,7 +29,7 @@ namespace WindowsFormsAppTest
         public void deleteCustomer (IMongoDatabase mongoDatabase, String id)
         {
             var collection = mongoDatabase.GetCollection<Customer>("customers");
-            collection.FindOneAndDeleteAsync(x => x.id.Equals(id));
+            collection.FindOneAndDeleteAsync(x => x._id.Equals(id));
         }
         public Customer findCustomerByPhone( String phoneNumber, IMongoDatabase mongoDatabase)
         {

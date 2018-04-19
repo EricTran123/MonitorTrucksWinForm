@@ -42,24 +42,42 @@
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewUser = new System.Windows.Forms.DataGridView();
-            this.tabCustomer = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.tabOrderTruck = new System.Windows.Forms.TabPage();
-            this.tabTruck = new System.Windows.Forms.TabPage();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Password = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.tabCustomer = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.ckcActiveCustomer = new System.Windows.Forms.CheckBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tabOrderTruck = new System.Windows.Forms.TabPage();
+            this.tabTruck = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnAddCustomer = new System.Windows.Forms.Button();
+            this.btnUpdateCustomer = new System.Windows.Forms.Button();
+            this.btnDeleteCustomer = new System.Windows.Forms.Button();
+            this.idCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createDateCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modifyDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isActiveCustomer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabUser.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUser)).BeginInit();
             this.tabCustomer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -102,9 +120,9 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(36, 40);
+            this.btnAdd.Location = new System.Drawing.Point(28, 19);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(95, 23);
+            this.btnAdd.Size = new System.Drawing.Size(140, 40);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -112,22 +130,23 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(190, 40);
+            this.btnUpdate.Location = new System.Drawing.Point(254, 19);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(100, 23);
+            this.btnUpdate.Size = new System.Drawing.Size(140, 40);
             this.btnUpdate.TabIndex = 2;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.button2_Click);
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(350, 40);
+            this.btnDelete.Location = new System.Drawing.Point(482, 19);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(99, 23);
+            this.btnDelete.Size = new System.Drawing.Size(140, 40);
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // groupBox1
             // 
@@ -215,8 +234,44 @@
             this.dataGridViewUser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUser_CellClick);
             this.dataGridViewUser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUser_CellContentClick);
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 220;
+            // 
+            // UserName
+            // 
+            this.UserName.HeaderText = "UserName";
+            this.UserName.Name = "UserName";
+            this.UserName.ReadOnly = true;
+            this.UserName.Width = 220;
+            // 
+            // Password
+            // 
+            this.Password.HeaderText = "Password";
+            this.Password.Name = "Password";
+            this.Password.ReadOnly = true;
+            this.Password.Visible = false;
+            // 
+            // CreateDate
+            // 
+            this.CreateDate.HeaderText = "CreateDate";
+            this.CreateDate.Name = "CreateDate";
+            this.CreateDate.ReadOnly = true;
+            this.CreateDate.Width = 220;
+            // 
+            // Active
+            // 
+            this.Active.HeaderText = "Active";
+            this.Active.Name = "Active";
+            this.Active.ReadOnly = true;
+            // 
             // tabCustomer
             // 
+            this.tabCustomer.Controls.Add(this.groupBox4);
+            this.tabCustomer.Controls.Add(this.dataGridView1);
             this.tabCustomer.Controls.Add(this.groupBox3);
             this.tabCustomer.Location = new System.Drawing.Point(4, 22);
             this.tabCustomer.Name = "tabCustomer";
@@ -227,16 +282,80 @@
             this.tabCustomer.UseVisualStyleBackColor = true;
             this.tabCustomer.Click += new System.EventHandler(this.tabPage2_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idCustomer,
+            this.phoneNumber,
+            this.address,
+            this.createDateCustomer,
+            this.modifyDate,
+            this.isActiveCustomer});
+            this.dataGridView1.Location = new System.Drawing.Point(84, 320);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(821, 220);
+            this.dataGridView1.TabIndex = 1;
+            // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.ckcActiveCustomer);
+            this.groupBox3.Controls.Add(this.textBox3);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.textBox2);
             this.groupBox3.Controls.Add(this.textBox1);
-            this.groupBox3.Location = new System.Drawing.Point(221, 38);
+            this.groupBox3.Location = new System.Drawing.Point(84, 17);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(490, 191);
+            this.groupBox3.Size = new System.Drawing.Size(821, 154);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Customer";
+            // 
+            // ckcActiveCustomer
+            // 
+            this.ckcActiveCustomer.AutoSize = true;
+            this.ckcActiveCustomer.Location = new System.Drawing.Point(389, 87);
+            this.ckcActiveCustomer.Name = "ckcActiveCustomer";
+            this.ckcActiveCustomer.Size = new System.Drawing.Size(56, 17);
+            this.ckcActiveCustomer.TabIndex = 6;
+            this.ckcActiveCustomer.Text = "Active";
+            this.ckcActiveCustomer.UseVisualStyleBackColor = true;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(103, 109);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 116);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(45, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Address";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 79);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(78, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Phone Number";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 34);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Name";
             // 
             // textBox2
             // 
@@ -274,39 +393,86 @@
             this.tabTruck.UseVisualStyleBackColor = true;
             this.tabTruck.Click += new System.EventHandler(this.tabPage4_Click);
             // 
-            // ID
+            // groupBox4
             // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 220;
+            this.groupBox4.Controls.Add(this.btnDeleteCustomer);
+            this.groupBox4.Controls.Add(this.btnUpdateCustomer);
+            this.groupBox4.Controls.Add(this.btnAddCustomer);
+            this.groupBox4.Location = new System.Drawing.Point(84, 177);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(821, 111);
+            this.groupBox4.TabIndex = 2;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Actions";
             // 
-            // UserName
+            // btnAddCustomer
             // 
-            this.UserName.HeaderText = "UserName";
-            this.UserName.Name = "UserName";
-            this.UserName.ReadOnly = true;
-            this.UserName.Width = 220;
+            this.btnAddCustomer.Location = new System.Drawing.Point(40, 37);
+            this.btnAddCustomer.Name = "btnAddCustomer";
+            this.btnAddCustomer.Size = new System.Drawing.Size(140, 40);
+            this.btnAddCustomer.TabIndex = 0;
+            this.btnAddCustomer.Text = "ADD";
+            this.btnAddCustomer.UseVisualStyleBackColor = true;
             // 
-            // Password
+            // btnUpdateCustomer
             // 
-            this.Password.HeaderText = "Password";
-            this.Password.Name = "Password";
-            this.Password.ReadOnly = true;
-            this.Password.Visible = false;
+            this.btnUpdateCustomer.Location = new System.Drawing.Point(298, 36);
+            this.btnUpdateCustomer.Name = "btnUpdateCustomer";
+            this.btnUpdateCustomer.Size = new System.Drawing.Size(140, 40);
+            this.btnUpdateCustomer.TabIndex = 1;
+            this.btnUpdateCustomer.Text = "UPDATE";
+            this.btnUpdateCustomer.UseVisualStyleBackColor = true;
             // 
-            // CreateDate
+            // btnDeleteCustomer
             // 
-            this.CreateDate.HeaderText = "CreateDate";
-            this.CreateDate.Name = "CreateDate";
-            this.CreateDate.ReadOnly = true;
-            this.CreateDate.Width = 220;
+            this.btnDeleteCustomer.Location = new System.Drawing.Point(605, 37);
+            this.btnDeleteCustomer.Name = "btnDeleteCustomer";
+            this.btnDeleteCustomer.Size = new System.Drawing.Size(140, 40);
+            this.btnDeleteCustomer.TabIndex = 2;
+            this.btnDeleteCustomer.Text = "DELETE";
+            this.btnDeleteCustomer.UseVisualStyleBackColor = true;
             // 
-            // Active
+            // idCustomer
             // 
-            this.Active.HeaderText = "Active";
-            this.Active.Name = "Active";
-            this.Active.ReadOnly = true;
+            this.idCustomer.HeaderText = "ID";
+            this.idCustomer.Name = "idCustomer";
+            this.idCustomer.ReadOnly = true;
+            this.idCustomer.Width = 80;
+            // 
+            // phoneNumber
+            // 
+            this.phoneNumber.HeaderText = "Phone Number";
+            this.phoneNumber.Name = "phoneNumber";
+            this.phoneNumber.ReadOnly = true;
+            this.phoneNumber.Width = 150;
+            // 
+            // address
+            // 
+            this.address.HeaderText = "Address";
+            this.address.Name = "address";
+            this.address.ReadOnly = true;
+            this.address.Width = 150;
+            // 
+            // createDateCustomer
+            // 
+            this.createDateCustomer.HeaderText = "CreateDate";
+            this.createDateCustomer.Name = "createDateCustomer";
+            this.createDateCustomer.ReadOnly = true;
+            this.createDateCustomer.Width = 150;
+            // 
+            // modifyDate
+            // 
+            this.modifyDate.HeaderText = "ModifyDate";
+            this.modifyDate.Name = "modifyDate";
+            this.modifyDate.ReadOnly = true;
+            this.modifyDate.Width = 150;
+            // 
+            // isActiveCustomer
+            // 
+            this.isActiveCustomer.HeaderText = "Active";
+            this.isActiveCustomer.Name = "isActiveCustomer";
+            this.isActiveCustomer.ReadOnly = true;
+            this.isActiveCustomer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Form2
             // 
@@ -325,8 +491,10 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUser)).EndInit();
             this.tabCustomer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -357,5 +525,21 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Password;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreateDate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Active;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox ckcActiveCustomer;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btnDeleteCustomer;
+        private System.Windows.Forms.Button btnUpdateCustomer;
+        private System.Windows.Forms.Button btnAddCustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createDateCustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn modifyDate;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isActiveCustomer;
     }
 }
