@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabUser = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnAddUser = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -48,36 +48,38 @@
             this.CreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabCustomer = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnDeleteCustomer = new System.Windows.Forms.Button();
+            this.btnUpdateCustomer = new System.Windows.Forms.Button();
+            this.btnAddCustomer = new System.Windows.Forms.Button();
+            this.dataGridViewCustomer = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.ckcActiveCustomer = new System.Windows.Forms.CheckBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtAddress = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtPhoneNumber = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.tabOrderTruck = new System.Windows.Forms.TabPage();
             this.tabTruck = new System.Windows.Forms.TabPage();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.btnAddCustomer = new System.Windows.Forms.Button();
-            this.btnUpdateCustomer = new System.Windows.Forms.Button();
-            this.btnDeleteCustomer = new System.Windows.Forms.Button();
             this.idCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createDateCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modifyDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isActiveCustomer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.idMongoDB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabUser.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUser)).BeginInit();
             this.tabCustomer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCustomer)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -89,7 +91,7 @@
             this.tabControl.Location = new System.Drawing.Point(-2, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1042, 574);
+            this.tabControl.Size = new System.Drawing.Size(1060, 599);
             this.tabControl.TabIndex = 0;
             // 
             // tabUser
@@ -100,33 +102,33 @@
             this.tabUser.Location = new System.Drawing.Point(4, 22);
             this.tabUser.Name = "tabUser";
             this.tabUser.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUser.Size = new System.Drawing.Size(1034, 548);
+            this.tabUser.Size = new System.Drawing.Size(1052, 573);
             this.tabUser.TabIndex = 0;
             this.tabUser.Text = "User";
             this.tabUser.UseVisualStyleBackColor = true;
-            this.tabUser.Click += new System.EventHandler(this.tabPage1_Click);
+            this.tabUser.Click += new System.EventHandler(this.userPage_Click);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.btnAdd);
+            this.groupBox2.Controls.Add(this.btnAddUser);
             this.groupBox2.Controls.Add(this.btnUpdate);
             this.groupBox2.Controls.Add(this.btnDelete);
-            this.groupBox2.Location = new System.Drawing.Point(95, 155);
+            this.groupBox2.Location = new System.Drawing.Point(23, 155);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(672, 82);
+            this.groupBox2.Size = new System.Drawing.Size(744, 82);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Actions";
             // 
-            // btnAdd
+            // btnAddUser
             // 
-            this.btnAdd.Location = new System.Drawing.Point(28, 19);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(140, 40);
-            this.btnAdd.TabIndex = 1;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAddUser.Location = new System.Drawing.Point(28, 19);
+            this.btnAddUser.Name = "btnAddUser";
+            this.btnAddUser.Size = new System.Drawing.Size(140, 40);
+            this.btnAddUser.TabIndex = 1;
+            this.btnAddUser.Text = "Add";
+            this.btnAddUser.UseVisualStyleBackColor = true;
+            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
             // 
             // btnUpdate
             // 
@@ -155,9 +157,9 @@
             this.groupBox1.Controls.Add(this.txtPassword);
             this.groupBox1.Controls.Add(this.txtUserName);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(95, 6);
+            this.groupBox1.Location = new System.Drawing.Point(23, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(672, 143);
+            this.groupBox1.Size = new System.Drawing.Size(744, 143);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "User";
@@ -218,21 +220,20 @@
             this.Password,
             this.CreateDate,
             this.Active});
-            this.dataGridViewUser.Location = new System.Drawing.Point(95, 243);
+            this.dataGridViewUser.Location = new System.Drawing.Point(23, 243);
             this.dataGridViewUser.Name = "dataGridViewUser";
             this.dataGridViewUser.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewUser.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewUser.Size = new System.Drawing.Size(804, 287);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewUser.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewUser.Size = new System.Drawing.Size(876, 287);
             this.dataGridViewUser.TabIndex = 0;
             this.dataGridViewUser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUser_CellClick);
-            this.dataGridViewUser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUser_CellContentClick);
             // 
             // ID
             // 
@@ -271,44 +272,87 @@
             // tabCustomer
             // 
             this.tabCustomer.Controls.Add(this.groupBox4);
-            this.tabCustomer.Controls.Add(this.dataGridView1);
+            this.tabCustomer.Controls.Add(this.dataGridViewCustomer);
             this.tabCustomer.Controls.Add(this.groupBox3);
             this.tabCustomer.Location = new System.Drawing.Point(4, 22);
             this.tabCustomer.Name = "tabCustomer";
             this.tabCustomer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCustomer.Size = new System.Drawing.Size(1034, 548);
+            this.tabCustomer.Size = new System.Drawing.Size(1052, 573);
             this.tabCustomer.TabIndex = 1;
             this.tabCustomer.Text = "Customers";
             this.tabCustomer.UseVisualStyleBackColor = true;
-            this.tabCustomer.Click += new System.EventHandler(this.tabPage2_Click);
+            this.tabCustomer.Click += new System.EventHandler(this.customerPage_Click);
             // 
-            // dataGridView1
+            // groupBox4
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.groupBox4.Controls.Add(this.btnDeleteCustomer);
+            this.groupBox4.Controls.Add(this.btnUpdateCustomer);
+            this.groupBox4.Controls.Add(this.btnAddCustomer);
+            this.groupBox4.Location = new System.Drawing.Point(21, 177);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(884, 92);
+            this.groupBox4.TabIndex = 2;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Actions";
+            // 
+            // btnDeleteCustomer
+            // 
+            this.btnDeleteCustomer.Location = new System.Drawing.Point(529, 19);
+            this.btnDeleteCustomer.Name = "btnDeleteCustomer";
+            this.btnDeleteCustomer.Size = new System.Drawing.Size(140, 40);
+            this.btnDeleteCustomer.TabIndex = 2;
+            this.btnDeleteCustomer.Text = "DELETE";
+            this.btnDeleteCustomer.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdateCustomer
+            // 
+            this.btnUpdateCustomer.Location = new System.Drawing.Point(293, 19);
+            this.btnUpdateCustomer.Name = "btnUpdateCustomer";
+            this.btnUpdateCustomer.Size = new System.Drawing.Size(140, 40);
+            this.btnUpdateCustomer.TabIndex = 1;
+            this.btnUpdateCustomer.Text = "UPDATE";
+            this.btnUpdateCustomer.UseVisualStyleBackColor = true;
+            // 
+            // btnAddCustomer
+            // 
+            this.btnAddCustomer.Location = new System.Drawing.Point(40, 19);
+            this.btnAddCustomer.Name = "btnAddCustomer";
+            this.btnAddCustomer.Size = new System.Drawing.Size(140, 40);
+            this.btnAddCustomer.TabIndex = 0;
+            this.btnAddCustomer.Text = "ADD";
+            this.btnAddCustomer.UseVisualStyleBackColor = true;
+            this.btnAddCustomer.Click += new System.EventHandler(this.btnAddCustomer_Click);
+            // 
+            // dataGridViewCustomer
+            // 
+            this.dataGridViewCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idCustomer,
+            this.customerName,
             this.phoneNumber,
             this.address,
             this.createDateCustomer,
             this.modifyDate,
-            this.isActiveCustomer});
-            this.dataGridView1.Location = new System.Drawing.Point(84, 320);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(821, 220);
-            this.dataGridView1.TabIndex = 1;
+            this.isActiveCustomer,
+            this.idMongoDB});
+            this.dataGridViewCustomer.Location = new System.Drawing.Point(21, 320);
+            this.dataGridViewCustomer.Name = "dataGridViewCustomer";
+            this.dataGridViewCustomer.Size = new System.Drawing.Size(975, 250);
+            this.dataGridViewCustomer.TabIndex = 1;
+            this.dataGridViewCustomer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCustomer_CellClick);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.ckcActiveCustomer);
-            this.groupBox3.Controls.Add(this.textBox3);
+            this.groupBox3.Controls.Add(this.txtAddress);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.textBox2);
-            this.groupBox3.Controls.Add(this.textBox1);
-            this.groupBox3.Location = new System.Drawing.Point(84, 17);
+            this.groupBox3.Controls.Add(this.txtPhoneNumber);
+            this.groupBox3.Controls.Add(this.txtName);
+            this.groupBox3.Location = new System.Drawing.Point(21, 17);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(821, 154);
+            this.groupBox3.Size = new System.Drawing.Size(884, 154);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Customer";
@@ -316,19 +360,19 @@
             // ckcActiveCustomer
             // 
             this.ckcActiveCustomer.AutoSize = true;
-            this.ckcActiveCustomer.Location = new System.Drawing.Point(389, 87);
+            this.ckcActiveCustomer.Location = new System.Drawing.Point(389, 78);
             this.ckcActiveCustomer.Name = "ckcActiveCustomer";
             this.ckcActiveCustomer.Size = new System.Drawing.Size(56, 17);
             this.ckcActiveCustomer.TabIndex = 6;
             this.ckcActiveCustomer.Text = "Active";
             this.ckcActiveCustomer.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // txtAddress
             // 
-            this.textBox3.Location = new System.Drawing.Point(103, 109);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 5;
+            this.txtAddress.Location = new System.Drawing.Point(103, 109);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(342, 20);
+            this.txtAddress.TabIndex = 5;
             // 
             // label4
             // 
@@ -357,26 +401,26 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Name";
             // 
-            // textBox2
+            // txtPhoneNumber
             // 
-            this.textBox2.Location = new System.Drawing.Point(103, 72);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 1;
+            this.txtPhoneNumber.Location = new System.Drawing.Point(103, 72);
+            this.txtPhoneNumber.Name = "txtPhoneNumber";
+            this.txtPhoneNumber.Size = new System.Drawing.Size(125, 20);
+            this.txtPhoneNumber.TabIndex = 1;
             // 
-            // textBox1
+            // txtName
             // 
-            this.textBox1.Location = new System.Drawing.Point(103, 31);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.txtName.Location = new System.Drawing.Point(103, 31);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(125, 20);
+            this.txtName.TabIndex = 0;
             // 
             // tabOrderTruck
             // 
             this.tabOrderTruck.Location = new System.Drawing.Point(4, 22);
             this.tabOrderTruck.Name = "tabOrderTruck";
             this.tabOrderTruck.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOrderTruck.Size = new System.Drawing.Size(1034, 548);
+            this.tabOrderTruck.Size = new System.Drawing.Size(1052, 573);
             this.tabOrderTruck.TabIndex = 2;
             this.tabOrderTruck.Text = "OrderTrucks";
             this.tabOrderTruck.UseVisualStyleBackColor = true;
@@ -387,60 +431,30 @@
             this.tabTruck.Location = new System.Drawing.Point(4, 22);
             this.tabTruck.Name = "tabTruck";
             this.tabTruck.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTruck.Size = new System.Drawing.Size(1034, 548);
+            this.tabTruck.Size = new System.Drawing.Size(1052, 573);
             this.tabTruck.TabIndex = 3;
             this.tabTruck.Text = "tabPage4";
             this.tabTruck.UseVisualStyleBackColor = true;
             this.tabTruck.Click += new System.EventHandler(this.tabPage4_Click);
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.btnDeleteCustomer);
-            this.groupBox4.Controls.Add(this.btnUpdateCustomer);
-            this.groupBox4.Controls.Add(this.btnAddCustomer);
-            this.groupBox4.Location = new System.Drawing.Point(84, 177);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(821, 111);
-            this.groupBox4.TabIndex = 2;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Actions";
-            // 
-            // btnAddCustomer
-            // 
-            this.btnAddCustomer.Location = new System.Drawing.Point(40, 37);
-            this.btnAddCustomer.Name = "btnAddCustomer";
-            this.btnAddCustomer.Size = new System.Drawing.Size(140, 40);
-            this.btnAddCustomer.TabIndex = 0;
-            this.btnAddCustomer.Text = "ADD";
-            this.btnAddCustomer.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdateCustomer
-            // 
-            this.btnUpdateCustomer.Location = new System.Drawing.Point(298, 36);
-            this.btnUpdateCustomer.Name = "btnUpdateCustomer";
-            this.btnUpdateCustomer.Size = new System.Drawing.Size(140, 40);
-            this.btnUpdateCustomer.TabIndex = 1;
-            this.btnUpdateCustomer.Text = "UPDATE";
-            this.btnUpdateCustomer.UseVisualStyleBackColor = true;
-            // 
-            // btnDeleteCustomer
-            // 
-            this.btnDeleteCustomer.Location = new System.Drawing.Point(605, 37);
-            this.btnDeleteCustomer.Name = "btnDeleteCustomer";
-            this.btnDeleteCustomer.Size = new System.Drawing.Size(140, 40);
-            this.btnDeleteCustomer.TabIndex = 2;
-            this.btnDeleteCustomer.Text = "DELETE";
-            this.btnDeleteCustomer.UseVisualStyleBackColor = true;
-            // 
             // idCustomer
             // 
+            this.idCustomer.Frozen = true;
             this.idCustomer.HeaderText = "ID";
             this.idCustomer.Name = "idCustomer";
             this.idCustomer.ReadOnly = true;
             this.idCustomer.Width = 80;
             // 
+            // customerName
+            // 
+            this.customerName.Frozen = true;
+            this.customerName.HeaderText = "Name";
+            this.customerName.Name = "customerName";
+            this.customerName.ReadOnly = true;
+            // 
             // phoneNumber
             // 
+            this.phoneNumber.Frozen = true;
             this.phoneNumber.HeaderText = "Phone Number";
             this.phoneNumber.Name = "phoneNumber";
             this.phoneNumber.ReadOnly = true;
@@ -448,13 +462,16 @@
             // 
             // address
             // 
+            this.address.Frozen = true;
             this.address.HeaderText = "Address";
             this.address.Name = "address";
             this.address.ReadOnly = true;
-            this.address.Width = 150;
+            this.address.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.address.Width = 200;
             // 
             // createDateCustomer
             // 
+            this.createDateCustomer.Frozen = true;
             this.createDateCustomer.HeaderText = "CreateDate";
             this.createDateCustomer.Name = "createDateCustomer";
             this.createDateCustomer.ReadOnly = true;
@@ -462,6 +479,7 @@
             // 
             // modifyDate
             // 
+            this.modifyDate.Frozen = true;
             this.modifyDate.HeaderText = "ModifyDate";
             this.modifyDate.Name = "modifyDate";
             this.modifyDate.ReadOnly = true;
@@ -469,16 +487,25 @@
             // 
             // isActiveCustomer
             // 
+            this.isActiveCustomer.Frozen = true;
             this.isActiveCustomer.HeaderText = "Active";
             this.isActiveCustomer.Name = "isActiveCustomer";
             this.isActiveCustomer.ReadOnly = true;
             this.isActiveCustomer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // idMongoDB
+            // 
+            this.idMongoDB.Frozen = true;
+            this.idMongoDB.HeaderText = "idMongoDB";
+            this.idMongoDB.Name = "idMongoDB";
+            this.idMongoDB.ReadOnly = true;
+            this.idMongoDB.Visible = false;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1038, 574);
+            this.ClientSize = new System.Drawing.Size(1058, 600);
             this.Controls.Add(this.tabControl);
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -491,10 +518,10 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUser)).EndInit();
             this.tabCustomer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCustomer)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -511,35 +538,37 @@
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnAddUser;
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtPhoneNumber;
+        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Password;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreateDate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Active;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox ckcActiveCustomer;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewCustomer;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btnDeleteCustomer;
         private System.Windows.Forms.Button btnUpdateCustomer;
         private System.Windows.Forms.Button btnAddCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn idCustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn address;
         private System.Windows.Forms.DataGridViewTextBoxColumn createDateCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn modifyDate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isActiveCustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idMongoDB;
     }
 }

@@ -15,8 +15,8 @@ namespace WindowsFormsAppTest
         public String phoneNumber { get; set; }
         public String address { get; set; }
         public Boolean isActive { get; set; }
-        public String createDate { get; set; }
-        public String modifyDate { get; set; }
+        public DateTime createDate { get; set; }
+        public DateTime modifyDate { get; set; }
         public Customer()
         {
             isActive = false;
@@ -39,13 +39,30 @@ namespace WindowsFormsAppTest
         public List<Customer> getAllCustomers (IMongoDatabase mongoDatabase)
         {
             var collection = mongoDatabase.GetCollection<Customer>("customers");
-            return collection.Find(x => !String.IsNullOrEmpty(x.name)).SortBy(x => x.name).ToList();
+            return collection.Find(x => !String.IsNullOrEmpty(x.name)).SortBy(x => x.createDate).ToList();
         }
-        public void updateCustomer(Customer customer, IMongoDatabase mongoDatabase)
+        public void updateCustomer(IMongoDatabase mongoDatabase, Customer currentUser, Customer newUser)
         {
-            if (null != customer)
+            if (!currentUser.Equals(newUser)){
+
+            }
             {
                 var collection = mongoDatabase.GetCollection<Customer>("customers");
+            }
+        }
+        public void addCustomer (IMongoDatabase mongoDatabase, Customer newCustomer)
+        {
+           
+            try
+            {
+                var collection = mongoDatabase.GetCollection<Customer>("customers");
+                if (newCustomer != null)
+                {
+                    collection.InsertOneAsync(newCustomer);
+                }
+            } catch(Exception e)
+            {
+                throw e;
             }
         }
     }

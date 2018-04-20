@@ -15,11 +15,13 @@ namespace WindowsFormsAppTest
 {
     public partial class Form2 : Form
     {
+        public String idSelectCustomer;
         public Form2()
         {
             InitializeComponent();
             Console.WriteLine(dataGridViewUser.ColumnCount);
            this.displayDataTableUser(dataGridViewUser);
+           this.displayDataTableCustomer(dataGridViewCustomer);
         }
 
 
@@ -27,16 +29,14 @@ namespace WindowsFormsAppTest
         {
             Console.WriteLine("Open form 2");
         }
-
-        private void tabPage1_Click(object sender, EventArgs e)
+        private void userPage_Click(object sender, EventArgs e)
         {
-            // this.displayDataTableUser(dataGridViewUser);
-
+            this.displayDataTableUser(dataGridViewUser);
         }
 
-        private void tabPage2_Click(object sender, EventArgs e)
+        private void customerPage_Click(object sender, EventArgs e)
         {
-
+            this.displayDataTableCustomer(dataGridViewCustomer);
         }
 
         private void tabPage3_Click(object sender, EventArgs e)
@@ -68,53 +68,22 @@ namespace WindowsFormsAppTest
             dataGridView.Refresh();
             for (int i = 0; i < listUsers.Count; i++)
             {
-               dataGridView.Rows.Add((new object[] { i + 1, listUsers[i].userName, listUsers[i].passWord, listUsers[i].createDate.ToLocalTime(), listUsers[i].active }));
+               dataGridView.Rows.Add(new object[] { i + 1, listUsers[i].userName, listUsers[i].passWord, listUsers[i].createDate.ToLocalTime(), listUsers[i].active });
             }
         }
-
-        private void btnAdd_Click(object sender, EventArgs e)
+        public void displayDataTableCustomer (DataGridView dataGridView)
         {
-            String username = txtUserName.Text.Trim();
-            String password = txtPassword.Text.Trim();
-
-            if (String.IsNullOrEmpty(username) && String.IsNullOrEmpty(password))
+            Customer customerData = new Customer();
+            MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
+            List<Customer> listCustomers = customerData.getAllCustomers(mongoDBConnection.getMongoData());
+            dataGridViewCustomer.Rows.Clear();
+            dataGridViewCustomer.Refresh();
+            for (int i = 0; i <listCustomers.Count; i++)
             {
-                MessageBox.Show("Please enter your username and passowrd.", "Message");
+                dataGridViewCustomer.Rows.Add(new object[] { i + 1, listCustomers[i].name, listCustomers[i].phoneNumber, listCustomers[i].address,
+                listCustomers[i].createDate.ToLocalTime(), listCustomers[i].modifyDate.ToLocalTime(), listCustomers[i].isActive, listCustomers[i]._id });
             }
-            else if (String.IsNullOrEmpty(username))
-            {
-                MessageBox.Show("Please enter your username.", "Message");
-
-            }
-            else if (String.IsNullOrEmpty(password))
-            {
-                MessageBox.Show("Please enter your passowrd.", "Message");
-            } else
-            {
-                User newUser = new User();
-                newUser.userName = username;
-                newUser.passWord = newUser.getMD5(password);
-                newUser.createDate = DateTime.Now.ToUniversalTime();
-                newUser.active = ckcActive.Checked;
-                try
-                {
-                    MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
-                    newUser.addUser(mongoDBConnection.getMongoData(), newUser);
-                    MessageBox.Show("New user is added successfully.", "Message");
-                    txtUserName.Clear();
-                    txtPassword.Clear();
-                    if (ckcActive.Checked)
-                    {
-                        ckcActive.Checked = false;
-                    }
-                    this.displayDataTableUser(dataGridViewUser);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Failed to add new user. Please try again.", "Message");
-                }
-            }
-           
+            Console.WriteLine(dataGridViewCustomer.ColumnCount);
         }
 
         private void dataGridViewUser_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -122,26 +91,28 @@ namespace WindowsFormsAppTest
 
             if (e.RowIndex >= 0)
             {
-                var gird = dataGridViewUser.Rows[e.RowIndex];
-                txtUserName.Text = dataGridViewUser.Rows[e.RowIndex].Cells[1].Value.ToString();
-                txtPassword.Text = dataGridViewUser.Rows[e.RowIndex].Cells[2].Value.ToString();
-                ckcActive.Checked = Convert.ToBoolean(dataGridViewUser.Rows[e.RowIndex].Cells[4].Value.ToString());
+                var girdUser = dataGridViewUser.Rows[e.RowIndex];
+                txtUserName.Text = girdUser.Cells[1].Value.ToString();
+                txtPassword.Text = girdUser.Cells[2].Value.ToString();
+                ckcActive.Checked = Convert.ToBoolean(girdUser.Cells[4].Value.ToString());
                 txtUserName.Enabled = false;
-
-               // Console.WriteLine(gird.Cells[0].Value);
-                 //Console.WriteLine(gird.Cells[1].Value);
-                //Console.WriteLine(gird.Cells[2].Value);
-              //  Console.WriteLine(gird.Cells[3].Value); 
-                // dataGridViewUser.Update();
-               //  dataGridViewUser.Refresh();
-              //  Console.WriteLine(e.RowIndex);
+            }
+        }
+        private void dataGridViewCustomer_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var gridCustomer = dataGridViewCustomer.Rows[e.RowIndex];
+                txtName.Text = gridCustomer.Cells[1].Value.ToString();
+                txtPhoneNumber.Text = gridCustomer.Cells[2].Value.ToString();
+                txtAddress.Text = gridCustomer.Cells[3].Value.ToString();
+                ckcActiveCustomer.Checked = Convert.ToBoolean(gridCustomer.Cells[6].Value.ToString());
+                idSelectCustomer = gridCustomer.Cells[7].Value.ToString();
+                Console.WriteLine(idSelectCustomer);
             }
         }
 
-        private void dataGridViewUser_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+   
 
         private void txtUserName_TextChanged(object sender, EventArgs e)
         {
@@ -246,6 +217,99 @@ namespace WindowsFormsAppTest
                     }
                 }
             }
+        }
+
+        private void btnAddCustomer_Click(object sender, EventArgs e)
+        {
+            String name = txtName.Text.Trim();
+            String phoneNumber = txtPhoneNumber.Text.Trim();
+            String address = txtAddress.Text.Trim();
+            bool isActive = ckcActiveCustomer.Checked;
+            Customer newCustomer = new Customer();
+            newCustomer.name = name;
+            newCustomer.phoneNumber = phoneNumber;
+            newCustomer.address = address;
+            newCustomer.isActive = ckcActiveCustomer.Checked;
+            newCustomer.createDate = DateTime.Now.ToUniversalTime();
+            newCustomer.modifyDate = DateTime.Now.ToUniversalTime();
+            
+            if (String.IsNullOrEmpty(name) && String.IsNullOrEmpty(phoneNumber))
+            {
+                MessageBox.Show("Please enter name and phone number.", "Message");
+            } else if (String.IsNullOrEmpty(name))
+            {
+                MessageBox.Show("Please enter name field.", "Message");
+            } else if (String.IsNullOrEmpty(phoneNumber))
+            {
+                MessageBox.Show("Please enter phone number field.", "Message");
+            } else
+            {
+                try
+                {
+                    MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
+                    newCustomer.addCustomer(mongoDBConnection.getMongoData(), newCustomer);
+                    MessageBox.Show("New Customer is added successfully.", "Message");
+                    txtName.Clear();
+                    txtPhoneNumber.Clear();
+                    txtAddress.Clear();
+                    if (ckcActiveCustomer.Checked)
+                    {
+                        ckcActiveCustomer.Checked = false;
+                    }
+                    this.displayDataTableCustomer(dataGridViewCustomer);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Failed to add new customer. Please try again.", "Message");
+                }
+            }
+           
+        }
+
+        private void btnAddUser_Click(object sender, EventArgs e)
+        {
+            String username = txtUserName.Text.Trim();
+            String password = txtPassword.Text.Trim();
+
+            if (String.IsNullOrEmpty(username) && String.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Please enter your username and passowrd.", "Message");
+            }
+            else if (String.IsNullOrEmpty(username))
+            {
+                MessageBox.Show("Please enter your username.", "Message");
+
+            }
+            else if (String.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Please enter your passowrd.", "Message");
+            }
+            else
+            {
+                User newUser = new User();
+                newUser.userName = username;
+                newUser.passWord = newUser.getMD5(password);
+                newUser.createDate = DateTime.Now.ToUniversalTime();
+                newUser.active = ckcActive.Checked;
+                try
+                {
+                    MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
+                    newUser.addUser(mongoDBConnection.getMongoData(), newUser);
+                    MessageBox.Show("New user is added successfully.", "Message");
+                    txtUserName.Clear();
+                    txtPassword.Clear();
+                    if (ckcActive.Checked)
+                    {
+                        ckcActive.Checked = false;
+                    }
+                    this.displayDataTableUser(dataGridViewUser);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Failed to add new user. Please try again.", "Message");
+                }
+            }
+
         }
     }
 }
