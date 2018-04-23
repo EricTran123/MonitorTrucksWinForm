@@ -53,6 +53,14 @@
             this.btnUpdateCustomer = new System.Windows.Forms.Button();
             this.btnAddCustomer = new System.Windows.Forms.Button();
             this.dataGridViewCustomer = new System.Windows.Forms.DataGridView();
+            this.idCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createDateCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modifyDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isActiveCustomer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.idMongoDB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.ckcActiveCustomer = new System.Windows.Forms.CheckBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
@@ -62,15 +70,33 @@
             this.txtPhoneNumber = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.tabOrderTruck = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.idOrderTruck = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.materialType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.note = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.completedDateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modifyDateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnDeleteOrderTruck = new System.Windows.Forms.Button();
+            this.btnUpdateOrderTruck = new System.Windows.Forms.Button();
+            this.btnAddOrderTruck = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtSubTotal = new System.Windows.Forms.TextBox();
+            this.lblSubTotal = new System.Windows.Forms.Label();
+            this.txtNote = new System.Windows.Forms.TextBox();
+            this.lblNote = new System.Windows.Forms.Label();
+            this.cbbMaterialType = new System.Windows.Forms.ComboBox();
+            this.lblMaterialType = new System.Windows.Forms.Label();
+            this.lblCustomerName = new System.Windows.Forms.Label();
+            this.cbbCustomer = new System.Windows.Forms.ComboBox();
             this.tabTruck = new System.Windows.Forms.TabPage();
-            this.idCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createDateCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modifyDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isActiveCustomer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.idMongoDB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabUser.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -80,6 +106,11 @@
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCustomer)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.tabOrderTruck.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -303,6 +334,7 @@
             this.btnDeleteCustomer.TabIndex = 2;
             this.btnDeleteCustomer.Text = "DELETE";
             this.btnDeleteCustomer.UseVisualStyleBackColor = true;
+            this.btnDeleteCustomer.Click += new System.EventHandler(this.btnDeleteCustomer_Click);
             // 
             // btnUpdateCustomer
             // 
@@ -312,6 +344,7 @@
             this.btnUpdateCustomer.TabIndex = 1;
             this.btnUpdateCustomer.Text = "UPDATE";
             this.btnUpdateCustomer.UseVisualStyleBackColor = true;
+            this.btnUpdateCustomer.Click += new System.EventHandler(this.btnUpdateCustomer_Click);
             // 
             // btnAddCustomer
             // 
@@ -340,6 +373,70 @@
             this.dataGridViewCustomer.Size = new System.Drawing.Size(975, 250);
             this.dataGridViewCustomer.TabIndex = 1;
             this.dataGridViewCustomer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCustomer_CellClick);
+            // 
+            // idCustomer
+            // 
+            this.idCustomer.Frozen = true;
+            this.idCustomer.HeaderText = "ID";
+            this.idCustomer.Name = "idCustomer";
+            this.idCustomer.ReadOnly = true;
+            this.idCustomer.Width = 80;
+            // 
+            // customerName
+            // 
+            this.customerName.Frozen = true;
+            this.customerName.HeaderText = "Name";
+            this.customerName.Name = "customerName";
+            this.customerName.ReadOnly = true;
+            // 
+            // phoneNumber
+            // 
+            this.phoneNumber.Frozen = true;
+            this.phoneNumber.HeaderText = "Phone Number";
+            this.phoneNumber.Name = "phoneNumber";
+            this.phoneNumber.ReadOnly = true;
+            this.phoneNumber.Width = 150;
+            // 
+            // address
+            // 
+            this.address.Frozen = true;
+            this.address.HeaderText = "Address";
+            this.address.Name = "address";
+            this.address.ReadOnly = true;
+            this.address.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.address.Width = 200;
+            // 
+            // createDateCustomer
+            // 
+            this.createDateCustomer.Frozen = true;
+            this.createDateCustomer.HeaderText = "CreateDate";
+            this.createDateCustomer.Name = "createDateCustomer";
+            this.createDateCustomer.ReadOnly = true;
+            this.createDateCustomer.Width = 150;
+            // 
+            // modifyDate
+            // 
+            this.modifyDate.Frozen = true;
+            this.modifyDate.HeaderText = "ModifyDate";
+            this.modifyDate.Name = "modifyDate";
+            this.modifyDate.ReadOnly = true;
+            this.modifyDate.Width = 150;
+            // 
+            // isActiveCustomer
+            // 
+            this.isActiveCustomer.Frozen = true;
+            this.isActiveCustomer.HeaderText = "Active";
+            this.isActiveCustomer.Name = "isActiveCustomer";
+            this.isActiveCustomer.ReadOnly = true;
+            this.isActiveCustomer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // idMongoDB
+            // 
+            this.idMongoDB.Frozen = true;
+            this.idMongoDB.HeaderText = "idMongoDB";
+            this.idMongoDB.Name = "idMongoDB";
+            this.idMongoDB.ReadOnly = true;
+            this.idMongoDB.Visible = false;
             // 
             // groupBox3
             // 
@@ -417,6 +514,10 @@
             // 
             // tabOrderTruck
             // 
+            this.tabOrderTruck.Controls.Add(this.groupBox7);
+            this.tabOrderTruck.Controls.Add(this.dataGridView1);
+            this.tabOrderTruck.Controls.Add(this.groupBox6);
+            this.tabOrderTruck.Controls.Add(this.groupBox5);
             this.tabOrderTruck.Location = new System.Drawing.Point(4, 22);
             this.tabOrderTruck.Name = "tabOrderTruck";
             this.tabOrderTruck.Padding = new System.Windows.Forms.Padding(3);
@@ -425,6 +526,234 @@
             this.tabOrderTruck.Text = "OrderTrucks";
             this.tabOrderTruck.UseVisualStyleBackColor = true;
             this.tabOrderTruck.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.checkBox1);
+            this.groupBox7.Location = new System.Drawing.Point(10, 271);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(905, 50);
+            this.groupBox7.TabIndex = 3;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Search";
+            // 
+            // dateTimePicker
+            // 
+            this.dateTimePicker.Checked = false;
+            this.dateTimePicker.Location = new System.Drawing.Point(455, 108);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker.TabIndex = 9;
+            this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker_ValueChanged);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idOrderTruck,
+            this.customer,
+            this.materialType,
+            this.note,
+            this.subTotal,
+            this.completedDateOrder,
+            this.modifyDateOrder});
+            this.dataGridView1.Location = new System.Drawing.Point(10, 327);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(1014, 201);
+            this.dataGridView1.TabIndex = 2;
+            // 
+            // idOrderTruck
+            // 
+            this.idOrderTruck.HeaderText = "ID";
+            this.idOrderTruck.Name = "idOrderTruck";
+            this.idOrderTruck.ReadOnly = true;
+            this.idOrderTruck.Width = 80;
+            // 
+            // customer
+            // 
+            this.customer.HeaderText = "Customer";
+            this.customer.Name = "customer";
+            this.customer.Width = 150;
+            // 
+            // materialType
+            // 
+            this.materialType.HeaderText = "Material Types";
+            this.materialType.Name = "materialType";
+            this.materialType.ReadOnly = true;
+            this.materialType.Width = 120;
+            // 
+            // note
+            // 
+            this.note.HeaderText = "Note";
+            this.note.Name = "note";
+            this.note.Width = 200;
+            // 
+            // subTotal
+            // 
+            this.subTotal.HeaderText = "SubTotal";
+            this.subTotal.Name = "subTotal";
+            this.subTotal.ReadOnly = true;
+            this.subTotal.Width = 120;
+            // 
+            // completedDateOrder
+            // 
+            this.completedDateOrder.HeaderText = "Completed Date";
+            this.completedDateOrder.Name = "completedDateOrder";
+            this.completedDateOrder.ReadOnly = true;
+            this.completedDateOrder.Width = 150;
+            // 
+            // modifyDateOrder
+            // 
+            this.modifyDateOrder.HeaderText = "ModifyDate";
+            this.modifyDateOrder.Name = "modifyDateOrder";
+            this.modifyDateOrder.ReadOnly = true;
+            this.modifyDateOrder.Width = 150;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.btnDeleteOrderTruck);
+            this.groupBox6.Controls.Add(this.btnUpdateOrderTruck);
+            this.groupBox6.Controls.Add(this.btnAddOrderTruck);
+            this.groupBox6.Location = new System.Drawing.Point(10, 180);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(905, 74);
+            this.groupBox6.TabIndex = 1;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Actions";
+            // 
+            // btnDeleteOrderTruck
+            // 
+            this.btnDeleteOrderTruck.Location = new System.Drawing.Point(628, 19);
+            this.btnDeleteOrderTruck.Name = "btnDeleteOrderTruck";
+            this.btnDeleteOrderTruck.Size = new System.Drawing.Size(140, 40);
+            this.btnDeleteOrderTruck.TabIndex = 2;
+            this.btnDeleteOrderTruck.Text = "DELETE";
+            this.btnDeleteOrderTruck.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdateOrderTruck
+            // 
+            this.btnUpdateOrderTruck.Location = new System.Drawing.Point(322, 19);
+            this.btnUpdateOrderTruck.Name = "btnUpdateOrderTruck";
+            this.btnUpdateOrderTruck.Size = new System.Drawing.Size(140, 40);
+            this.btnUpdateOrderTruck.TabIndex = 1;
+            this.btnUpdateOrderTruck.Text = "UPDATE";
+            this.btnUpdateOrderTruck.UseVisualStyleBackColor = true;
+            // 
+            // btnAddOrderTruck
+            // 
+            this.btnAddOrderTruck.Location = new System.Drawing.Point(43, 19);
+            this.btnAddOrderTruck.Name = "btnAddOrderTruck";
+            this.btnAddOrderTruck.Size = new System.Drawing.Size(140, 40);
+            this.btnAddOrderTruck.TabIndex = 0;
+            this.btnAddOrderTruck.Text = "ADD";
+            this.btnAddOrderTruck.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label6);
+            this.groupBox5.Controls.Add(this.dateTimePicker);
+            this.groupBox5.Controls.Add(this.label5);
+            this.groupBox5.Controls.Add(this.txtSubTotal);
+            this.groupBox5.Controls.Add(this.lblSubTotal);
+            this.groupBox5.Controls.Add(this.txtNote);
+            this.groupBox5.Controls.Add(this.lblNote);
+            this.groupBox5.Controls.Add(this.cbbMaterialType);
+            this.groupBox5.Controls.Add(this.lblMaterialType);
+            this.groupBox5.Controls.Add(this.lblCustomerName);
+            this.groupBox5.Controls.Add(this.cbbCustomer);
+            this.groupBox5.Location = new System.Drawing.Point(10, 6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(758, 141);
+            this.groupBox5.TabIndex = 0;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Orders Truck";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label6.Location = new System.Drawing.Point(561, 37);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(30, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "VND";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(342, 114);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(83, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Completed Date";
+            // 
+            // txtSubTotal
+            // 
+            this.txtSubTotal.Location = new System.Drawing.Point(455, 34);
+            this.txtSubTotal.Name = "txtSubTotal";
+            this.txtSubTotal.Size = new System.Drawing.Size(100, 20);
+            this.txtSubTotal.TabIndex = 7;
+            // 
+            // lblSubTotal
+            // 
+            this.lblSubTotal.AutoSize = true;
+            this.lblSubTotal.Location = new System.Drawing.Point(347, 42);
+            this.lblSubTotal.Name = "lblSubTotal";
+            this.lblSubTotal.Size = new System.Drawing.Size(50, 13);
+            this.lblSubTotal.TabIndex = 6;
+            this.lblSubTotal.Text = "SubTotal";
+            // 
+            // txtNote
+            // 
+            this.txtNote.Location = new System.Drawing.Point(133, 107);
+            this.txtNote.Name = "txtNote";
+            this.txtNote.Size = new System.Drawing.Size(121, 20);
+            this.txtNote.TabIndex = 5;
+            // 
+            // lblNote
+            // 
+            this.lblNote.AutoSize = true;
+            this.lblNote.Location = new System.Drawing.Point(21, 107);
+            this.lblNote.Name = "lblNote";
+            this.lblNote.Size = new System.Drawing.Size(30, 13);
+            this.lblNote.TabIndex = 4;
+            this.lblNote.Text = "Note";
+            this.lblNote.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // cbbMaterialType
+            // 
+            this.cbbMaterialType.FormattingEnabled = true;
+            this.cbbMaterialType.Location = new System.Drawing.Point(133, 70);
+            this.cbbMaterialType.Name = "cbbMaterialType";
+            this.cbbMaterialType.Size = new System.Drawing.Size(121, 21);
+            this.cbbMaterialType.TabIndex = 3;
+            // 
+            // lblMaterialType
+            // 
+            this.lblMaterialType.AutoSize = true;
+            this.lblMaterialType.Location = new System.Drawing.Point(21, 73);
+            this.lblMaterialType.Name = "lblMaterialType";
+            this.lblMaterialType.Size = new System.Drawing.Size(71, 13);
+            this.lblMaterialType.TabIndex = 2;
+            this.lblMaterialType.Text = "Material Type";
+            // 
+            // lblCustomerName
+            // 
+            this.lblCustomerName.AutoSize = true;
+            this.lblCustomerName.Location = new System.Drawing.Point(21, 42);
+            this.lblCustomerName.Name = "lblCustomerName";
+            this.lblCustomerName.Size = new System.Drawing.Size(89, 13);
+            this.lblCustomerName.TabIndex = 1;
+            this.lblCustomerName.Text = "Customer\'s Name";
+            // 
+            // cbbCustomer
+            // 
+            this.cbbCustomer.FormattingEnabled = true;
+            this.cbbCustomer.Location = new System.Drawing.Point(133, 34);
+            this.cbbCustomer.Name = "cbbCustomer";
+            this.cbbCustomer.Size = new System.Drawing.Size(121, 21);
+            this.cbbCustomer.TabIndex = 0;
+            this.cbbCustomer.SelectedIndexChanged += new System.EventHandler(this.cbbCustomer_SelectedIndexChanged);
             // 
             // tabTruck
             // 
@@ -437,69 +766,15 @@
             this.tabTruck.UseVisualStyleBackColor = true;
             this.tabTruck.Click += new System.EventHandler(this.tabPage4_Click);
             // 
-            // idCustomer
+            // checkBox1
             // 
-            this.idCustomer.Frozen = true;
-            this.idCustomer.HeaderText = "ID";
-            this.idCustomer.Name = "idCustomer";
-            this.idCustomer.ReadOnly = true;
-            this.idCustomer.Width = 80;
-            // 
-            // customerName
-            // 
-            this.customerName.Frozen = true;
-            this.customerName.HeaderText = "Name";
-            this.customerName.Name = "customerName";
-            this.customerName.ReadOnly = true;
-            // 
-            // phoneNumber
-            // 
-            this.phoneNumber.Frozen = true;
-            this.phoneNumber.HeaderText = "Phone Number";
-            this.phoneNumber.Name = "phoneNumber";
-            this.phoneNumber.ReadOnly = true;
-            this.phoneNumber.Width = 150;
-            // 
-            // address
-            // 
-            this.address.Frozen = true;
-            this.address.HeaderText = "Address";
-            this.address.Name = "address";
-            this.address.ReadOnly = true;
-            this.address.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.address.Width = 200;
-            // 
-            // createDateCustomer
-            // 
-            this.createDateCustomer.Frozen = true;
-            this.createDateCustomer.HeaderText = "CreateDate";
-            this.createDateCustomer.Name = "createDateCustomer";
-            this.createDateCustomer.ReadOnly = true;
-            this.createDateCustomer.Width = 150;
-            // 
-            // modifyDate
-            // 
-            this.modifyDate.Frozen = true;
-            this.modifyDate.HeaderText = "ModifyDate";
-            this.modifyDate.Name = "modifyDate";
-            this.modifyDate.ReadOnly = true;
-            this.modifyDate.Width = 150;
-            // 
-            // isActiveCustomer
-            // 
-            this.isActiveCustomer.Frozen = true;
-            this.isActiveCustomer.HeaderText = "Active";
-            this.isActiveCustomer.Name = "isActiveCustomer";
-            this.isActiveCustomer.ReadOnly = true;
-            this.isActiveCustomer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // idMongoDB
-            // 
-            this.idMongoDB.Frozen = true;
-            this.idMongoDB.HeaderText = "idMongoDB";
-            this.idMongoDB.Name = "idMongoDB";
-            this.idMongoDB.ReadOnly = true;
-            this.idMongoDB.Visible = false;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(475, 19);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Form2
             // 
@@ -522,6 +797,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCustomer)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabOrderTruck.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -570,5 +852,31 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn modifyDate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isActiveCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn idMongoDB;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ComboBox cbbCustomer;
+        private System.Windows.Forms.Label lblCustomerName;
+        private System.Windows.Forms.Label lblNote;
+        private System.Windows.Forms.ComboBox cbbMaterialType;
+        private System.Windows.Forms.Label lblMaterialType;
+        private System.Windows.Forms.TextBox txtNote;
+        private System.Windows.Forms.Button btnDeleteOrderTruck;
+        private System.Windows.Forms.Button btnUpdateOrderTruck;
+        private System.Windows.Forms.Button btnAddOrderTruck;
+        private System.Windows.Forms.TextBox txtSubTotal;
+        private System.Windows.Forms.Label lblSubTotal;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker dateTimePicker;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idOrderTruck;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn materialType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn note;
+        private System.Windows.Forms.DataGridViewTextBoxColumn subTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn completedDateOrder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn modifyDateOrder;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

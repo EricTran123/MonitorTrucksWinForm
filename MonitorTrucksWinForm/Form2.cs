@@ -15,13 +15,16 @@ namespace WindowsFormsAppTest
 {
     public partial class Form2 : Form
     {
-        public String idSelectCustomer;
+        public String selectedCustomer;
         public Form2()
         {
             InitializeComponent();
-            Console.WriteLine(dataGridViewUser.ColumnCount);
-           this.displayDataTableUser(dataGridViewUser);
-           this.displayDataTableCustomer(dataGridViewCustomer);
+            this.displayDataTableUser(dataGridViewUser);
+            this.displayDataTableCustomer(dataGridViewCustomer);
+            dateTimePicker.CustomFormat = " ";
+            dateTimePicker.Format = DateTimePickerFormat.Custom;
+            Console.WriteLine("QQQQQQQQQQ");
+            Console.WriteLine(dateTimePicker.Value);
         }
 
 
@@ -58,7 +61,7 @@ namespace WindowsFormsAppTest
         {
 
         }
-        
+
         public void displayDataTableUser(DataGridView dataGridView)
         {
             User userData = new User();
@@ -68,17 +71,17 @@ namespace WindowsFormsAppTest
             dataGridView.Refresh();
             for (int i = 0; i < listUsers.Count; i++)
             {
-               dataGridView.Rows.Add(new object[] { i + 1, listUsers[i].userName, listUsers[i].passWord, listUsers[i].createDate.ToLocalTime(), listUsers[i].active });
+                dataGridView.Rows.Add(new object[] { i + 1, listUsers[i].userName, listUsers[i].passWord, listUsers[i].createDate.ToLocalTime(), listUsers[i].active });
             }
         }
-        public void displayDataTableCustomer (DataGridView dataGridView)
+        public void displayDataTableCustomer(DataGridView dataGridView)
         {
             Customer customerData = new Customer();
             MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
             List<Customer> listCustomers = customerData.getAllCustomers(mongoDBConnection.getMongoData());
             dataGridViewCustomer.Rows.Clear();
             dataGridViewCustomer.Refresh();
-            for (int i = 0; i <listCustomers.Count; i++)
+            for (int i = 0; i < listCustomers.Count; i++)
             {
                 dataGridViewCustomer.Rows.Add(new object[] { i + 1, listCustomers[i].name, listCustomers[i].phoneNumber, listCustomers[i].address,
                 listCustomers[i].createDate.ToLocalTime(), listCustomers[i].modifyDate.ToLocalTime(), listCustomers[i].isActive, listCustomers[i]._id });
@@ -107,12 +110,12 @@ namespace WindowsFormsAppTest
                 txtPhoneNumber.Text = gridCustomer.Cells[2].Value.ToString();
                 txtAddress.Text = gridCustomer.Cells[3].Value.ToString();
                 ckcActiveCustomer.Checked = Convert.ToBoolean(gridCustomer.Cells[6].Value.ToString());
-                idSelectCustomer = gridCustomer.Cells[7].Value.ToString();
-                Console.WriteLine(idSelectCustomer);
+                selectedCustomer = gridCustomer.Cells[7].Value.ToString();
+                Console.WriteLine(selectedCustomer);
             }
         }
 
-   
+
 
         private void txtUserName_TextChanged(object sender, EventArgs e)
         {
@@ -159,12 +162,13 @@ namespace WindowsFormsAppTest
                         MessageBox.Show("Failed to delete this user. Please try again.", "Message");
                     }
                 }
-               
-            } else
+
+            }
+            else
             {
                 MessageBox.Show("Please select the user to delete.", "Message");
             }
-            
+
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -184,7 +188,8 @@ namespace WindowsFormsAppTest
             else if (String.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Please enter your passowrd.", "Message");
-            } else
+            }
+            else
             {
                 DialogResult dr = MessageBox.Show("Do you want to update this user?", "Confirmed Message", MessageBoxButtons.YesNoCancel,
                   MessageBoxIcon.Information);
@@ -232,17 +237,20 @@ namespace WindowsFormsAppTest
             newCustomer.isActive = ckcActiveCustomer.Checked;
             newCustomer.createDate = DateTime.Now.ToUniversalTime();
             newCustomer.modifyDate = DateTime.Now.ToUniversalTime();
-            
+
             if (String.IsNullOrEmpty(name) && String.IsNullOrEmpty(phoneNumber))
             {
                 MessageBox.Show("Please enter name and phone number.", "Message");
-            } else if (String.IsNullOrEmpty(name))
+            }
+            else if (String.IsNullOrEmpty(name))
             {
                 MessageBox.Show("Please enter name field.", "Message");
-            } else if (String.IsNullOrEmpty(phoneNumber))
+            }
+            else if (String.IsNullOrEmpty(phoneNumber))
             {
                 MessageBox.Show("Please enter phone number field.", "Message");
-            } else
+            }
+            else
             {
                 try
                 {
@@ -263,7 +271,7 @@ namespace WindowsFormsAppTest
                     MessageBox.Show("Failed to add new customer. Please try again.", "Message");
                 }
             }
-           
+
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)
@@ -310,6 +318,117 @@ namespace WindowsFormsAppTest
                 }
             }
 
+        }
+
+        private void btnUpdateCustomer_Click(object sender, EventArgs e)
+        {
+            Customer currentUser = new Customer();
+            String updateName = txtName.Text.Trim();
+            String updatePhoneNumber = txtPhoneNumber.Text.Trim();
+            String updateAddress = txtAddress.Text.Trim();
+            bool updateIsActive = ckcActiveCustomer.Checked;
+
+            if (!String.IsNullOrEmpty(selectedCustomer))
+            {
+                MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
+                currentUser = currentUser.findCustomerByID(mongoDBConnection.getMongoData(), selectedCustomer);
+                Customer updateCustomer = new Customer();
+                if (String.IsNullOrEmpty(txtName.Text) && String.IsNullOrEmpty(txtPhoneNumber.Text))
+                {
+                    MessageBox.Show("Please enter name and phone number.", "Message");
+                }
+                else if (String.IsNullOrEmpty(txtName.Text))
+                {
+                    MessageBox.Show("Please enter name field.", "Message");
+                }
+                else if (String.IsNullOrEmpty(txtPhoneNumber.Text))
+                {
+                    MessageBox.Show("Please enter phone number field.", "Message");
+                } else
+                {
+                    updateCustomer.name = updateName;
+                    updateCustomer.phoneNumber = updatePhoneNumber;
+                    updateCustomer.address = updateAddress;
+                    updateCustomer.isActive = updateIsActive;
+                    updateCustomer.modifyDate = DateTime.Now.ToUniversalTime();
+
+                    currentUser.updateCustomer(mongoDBConnection.getMongoData(), currentUser, updateCustomer);
+                    MessageBox.Show("The customer is updated successfully.", "Message");
+                    txtName.Clear();
+                    txtPhoneNumber.Clear();
+                    txtAddress.Clear();
+                    if (ckcActiveCustomer.Checked)
+                    {
+                        ckcActiveCustomer.Checked = false;
+                    }
+                    this.displayDataTableCustomer(dataGridViewCustomer);
+                }
+            } else
+            {
+                MessageBox.Show("Please select the customer to delete.", "Message");
+            }
+           
+            
+        }
+
+        private void btnDeleteCustomer_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(selectedCustomer))
+            {
+
+                if (String.IsNullOrEmpty(txtName.Text) || String.IsNullOrEmpty(txtPhoneNumber.Text) || String.IsNullOrEmpty(txtAddress.Text))
+                {
+                    MessageBox.Show("Please select the customer to delete.", "Message");
+                }
+                else
+                {
+                    try
+                    {
+                        MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
+                        Customer deleteCustomer = new Customer();
+                        deleteCustomer.deleteCustomer(mongoDBConnection.getMongoData(), selectedCustomer);
+                        MessageBox.Show("Customer is deleted successfully . Please try again.", "Message");
+                        txtName.Clear();
+                        txtPhoneNumber.Clear();
+                        txtAddress.Clear();
+                        if (ckcActiveCustomer.Checked)
+                        {
+                            ckcActiveCustomer.Checked = false;
+                        }
+                        this.displayDataTableCustomer(dataGridViewCustomer);
+                    } catch (Exception)
+                    {
+                        MessageBox.Show("Failed to delete the customer. Please try again.", "Message");
+                    }
+                   
+                }
+
+
+            }
+            else
+            {
+                MessageBox.Show("Please select the customer to delete.", "Message");
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbbCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePicker.CustomFormat = "dd/MM/yyyy hh:mm:ss";
         }
     }
 }
