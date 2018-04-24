@@ -42,6 +42,11 @@ namespace WindowsFormsAppTest
             var collection = mongoDatabase.GetCollection<Customer>("customers");
             return collection.Find(x => x.phoneNumber.Equals(phoneNumber)).FirstOrDefault();
         }
+        public Customer findCustomerByName(String name, IMongoDatabase mongoDatabase)
+        {
+            var collection = mongoDatabase.GetCollection<Customer>("customers");
+            return collection.Find(x => x.name.Equals(name)).FirstOrDefault();
+        }
 
         public Customer findCustomerByID(IMongoDatabase mongoDatabase, String id)
         {

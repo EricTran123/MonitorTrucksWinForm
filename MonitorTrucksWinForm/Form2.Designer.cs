@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabUser = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -71,7 +71,7 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.tabOrderTruck = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.idOrderTruck = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,6 +86,7 @@
             this.btnAddOrderTruck = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.txtSubTotal = new System.Windows.Forms.TextBox();
             this.lblSubTotal = new System.Windows.Forms.Label();
@@ -96,7 +97,6 @@
             this.lblCustomerName = new System.Windows.Forms.Label();
             this.cbbCustomer = new System.Windows.Forms.ComboBox();
             this.tabTruck = new System.Windows.Forms.TabPage();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabUser.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -254,14 +254,14 @@
             this.dataGridViewUser.Location = new System.Drawing.Point(23, 243);
             this.dataGridViewUser.Name = "dataGridViewUser";
             this.dataGridViewUser.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewUser.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewUser.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewUser.Size = new System.Drawing.Size(876, 287);
             this.dataGridViewUser.TabIndex = 0;
             this.dataGridViewUser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUser_CellClick);
@@ -525,7 +525,7 @@
             this.tabOrderTruck.TabIndex = 2;
             this.tabOrderTruck.Text = "OrderTrucks";
             this.tabOrderTruck.UseVisualStyleBackColor = true;
-            this.tabOrderTruck.Click += new System.EventHandler(this.tabPage3_Click);
+            this.tabOrderTruck.Click += new System.EventHandler(this.tabOrderTruck_Click);
             // 
             // groupBox7
             // 
@@ -537,14 +537,15 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Search";
             // 
-            // dateTimePicker
+            // checkBox1
             // 
-            this.dateTimePicker.Checked = false;
-            this.dateTimePicker.Location = new System.Drawing.Point(455, 108);
-            this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker.TabIndex = 9;
-            this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker_ValueChanged);
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(475, 19);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -629,6 +630,7 @@
             this.btnDeleteOrderTruck.TabIndex = 2;
             this.btnDeleteOrderTruck.Text = "DELETE";
             this.btnDeleteOrderTruck.UseVisualStyleBackColor = true;
+            this.btnDeleteOrderTruck.Click += new System.EventHandler(this.btnDeleteOrderTruck_Click);
             // 
             // btnUpdateOrderTruck
             // 
@@ -638,6 +640,7 @@
             this.btnUpdateOrderTruck.TabIndex = 1;
             this.btnUpdateOrderTruck.Text = "UPDATE";
             this.btnUpdateOrderTruck.UseVisualStyleBackColor = true;
+            this.btnUpdateOrderTruck.Click += new System.EventHandler(this.btnUpdateOrderTruck_Click);
             // 
             // btnAddOrderTruck
             // 
@@ -647,6 +650,7 @@
             this.btnAddOrderTruck.TabIndex = 0;
             this.btnAddOrderTruck.Text = "ADD";
             this.btnAddOrderTruck.UseVisualStyleBackColor = true;
+            this.btnAddOrderTruck.Click += new System.EventHandler(this.btnAddOrderTruck_Click);
             // 
             // groupBox5
             // 
@@ -677,6 +681,15 @@
             this.label6.Size = new System.Drawing.Size(30, 13);
             this.label6.TabIndex = 10;
             this.label6.Text = "VND";
+            // 
+            // dateTimePicker
+            // 
+            this.dateTimePicker.Checked = false;
+            this.dateTimePicker.Location = new System.Drawing.Point(455, 108);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker.TabIndex = 9;
+            this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker_ValueChanged);
             // 
             // label5
             // 
@@ -764,17 +777,6 @@
             this.tabTruck.TabIndex = 3;
             this.tabTruck.Text = "tabPage4";
             this.tabTruck.UseVisualStyleBackColor = true;
-            this.tabTruck.Click += new System.EventHandler(this.tabPage4_Click);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(475, 19);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Form2
             // 

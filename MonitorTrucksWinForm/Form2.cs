@@ -24,9 +24,12 @@ namespace WindowsFormsAppTest
             dateTimePicker.CustomFormat = " ";
             dateTimePicker.Format = DateTimePickerFormat.Custom;
             Console.WriteLine("QQQQQQQQQQ");
-            Console.WriteLine(dateTimePicker.Value);
-        }
+            DateTime d = new DateTime();
+            d = dateTimePicker.Value;
+            Console.WriteLine(d.ToUniversalTime());
+            this.loadValueCustomerCombobox(cbbCustomer);
 
+        }
 
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -40,16 +43,7 @@ namespace WindowsFormsAppTest
         private void customerPage_Click(object sender, EventArgs e)
         {
             this.displayDataTableCustomer(dataGridViewCustomer);
-        }
-
-        private void tabPage3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage4_Click(object sender, EventArgs e)
-        {
-
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -265,6 +259,7 @@ namespace WindowsFormsAppTest
                         ckcActiveCustomer.Checked = false;
                     }
                     this.displayDataTableCustomer(dataGridViewCustomer);
+                    this.loadValueCustomerCombobox(cbbCustomer);
                 }
                 catch (Exception)
                 {
@@ -362,6 +357,7 @@ namespace WindowsFormsAppTest
                         ckcActiveCustomer.Checked = false;
                     }
                     this.displayDataTableCustomer(dataGridViewCustomer);
+                    this.loadValueCustomerCombobox(cbbCustomer);
                 }
             } else
             {
@@ -396,14 +392,13 @@ namespace WindowsFormsAppTest
                             ckcActiveCustomer.Checked = false;
                         }
                         this.displayDataTableCustomer(dataGridViewCustomer);
+                        this.loadValueCustomerCombobox(cbbCustomer);
                     } catch (Exception)
                     {
                         MessageBox.Show("Failed to delete the customer. Please try again.", "Message");
                     }
                    
                 }
-
-
             }
             else
             {
@@ -423,12 +418,72 @@ namespace WindowsFormsAppTest
 
         private void cbbCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+           // this.loadValueCustomerCombobox(cbbCustomer);
+            Console.WriteLine(cbbCustomer.SelectedItem.ToString());
+           
         }
 
         private void dateTimePicker_ValueChanged(object sender, EventArgs e)
         {
             dateTimePicker.CustomFormat = "dd/MM/yyyy hh:mm:ss";
+        }
+
+        private void tabOrderTruck_Click(object sender, EventArgs e)
+        {
+            this.loadValueCustomerCombobox(cbbCustomer);
+        }
+        public void loadValueCustomerCombobox (ComboBox customerCombobox)
+        {
+            MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
+            Customer customer = new Customer();
+            List<Customer> listCustomers = customer.getAllActiveCustomers(mongoDBConnection.getMongoData());
+            cbbCustomer.Items.Clear();
+            cbbCustomer.ResetText();
+            foreach(Customer customer1 in listCustomers)
+            {
+                cbbCustomer.Items.Add(customer1.name);
+            }
+        }
+
+        private void btnAddOrderTruck_Click(object sender, EventArgs e)
+        {
+            this.clearOrderTruckTab();
+          // String materialType = cbbMaterialType.SelectedItem.ToString().Trim();
+            if (String.IsNullOrEmpty(cbbMaterialType.))
+            {
+                Console.WriteLine("YYYYYYYYYYYYYYY");
+            }
+            String note = txtNote.Text.Trim();
+         //   int subTotal = int.Parse(txtSubTotal.Text.Trim());
+            DateTime completedDay = dateTimePicker.Value.ToUniversalTime();
+            Console.WriteLine("=======================");
+            Console.WriteLine(completedDay.ToLocalTime());
+            MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
+            Customer selectedCustomer = new Customer();
+            selectedCustomer = selectedCustomer.findCustomerByName(cbbCustomer.SelectedItem.ToString().Trim(), mongoDBConnection.getMongoData());
+            Console.WriteLine(selectedCustomer._id);
+            OrderTruck newOrderTruck = new OrderTruck();
+            newOrderTruck.customer = selectedCustomer;
+
+        }
+        public void clearOrderTruckTab()
+        {
+            cbbCustomer.ResetText();
+            cbbMaterialType.ResetText();
+            txtNote.Clear();
+            txtSubTotal.Clear();
+            dateTimePicker.CustomFormat = " ";
+            dateTimePicker.Format = DateTimePickerFormat.Custom;
+        }
+
+        private void btnUpdateOrderTruck_Click(object sender, EventArgs e)
+        {
+            this.clearOrderTruckTab();
+        }
+
+        private void btnDeleteOrderTruck_Click(object sender, EventArgs e)
+        {
+            this.clearOrderTruckTab();
         }
     }
 }

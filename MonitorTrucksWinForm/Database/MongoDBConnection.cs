@@ -44,7 +44,6 @@ namespace WindowsFormsAppTest.Database
                 {
                     mongoDatabase = null;
                 }
-
             }
             return mongoDatabase;
         }
