@@ -18,8 +18,23 @@ namespace WindowsFormsAppTest.Model
         public DateTime createDate { get; set; }
         public DateTime completedDate { get; set; }
         public DateTime modifyDate { get; set; }
+        public bool isPaid { get; set; }
 
-       
+        public void addOrderTruck(IMongoDatabase mongoDatabase, OrderTruck newOrderTruck)
+        {
+            try
+            {
+                var collection = mongoDatabase.GetCollection<OrderTruck>("ordertrucks");
+                if (null != newOrderTruck)
+                {
+                    collection.InsertOneAsync(newOrderTruck);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
         public List<OrderTruck> filterByCreateDate (DateTime startDate, DateTime endDate, IMongoDatabase mongoDatabase)
         {
             if (startDate <= endDate)
@@ -29,6 +44,18 @@ namespace WindowsFormsAppTest.Model
             } else
             {
                 return null;
+            }
+        }
+        public List<OrderTruck> getListIsPaidOrderTruck (IMongoDatabase mongoDatabase, bool isPaid)
+        {
+            try
+            {
+                var collection = mongoDatabase.GetCollection<OrderTruck>("ordertrucks");
+                return collection.FindSync(x => x.isPaid.Equals(isPaid)).ToList();
+            } catch (Exception e)
+            {
+                return null;
+                throw e;
             }
         }
 

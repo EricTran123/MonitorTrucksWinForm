@@ -23,11 +23,16 @@ namespace WindowsFormsAppTest
             this.displayDataTableCustomer(dataGridViewCustomer);
             dateTimePicker.CustomFormat = " ";
             dateTimePicker.Format = DateTimePickerFormat.Custom;
+            dateTPStartDay.CustomFormat = " ";
+            dateTPStartDay.Format = DateTimePickerFormat.Custom;
+            dateTPEnday.CustomFormat = " ";
+            dateTPEnday.Format = DateTimePickerFormat.Custom;
             Console.WriteLine("QQQQQQQQQQ");
             DateTime d = new DateTime();
             d = dateTimePicker.Value;
             Console.WriteLine(d.ToUniversalTime());
             this.loadValueCustomerCombobox(cbbCustomer);
+            this.loadValueMaterialTypeCombobox(cbbMaterialType);
 
         }
 
@@ -425,7 +430,7 @@ namespace WindowsFormsAppTest
 
         private void dateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            dateTimePicker.CustomFormat = "dd/MM/yyyy hh:mm:ss";
+            dateTimePicker.CustomFormat = "dd/MM/yyyy";
         }
 
         private void tabOrderTruck_Click(object sender, EventArgs e)
@@ -444,27 +449,61 @@ namespace WindowsFormsAppTest
                 cbbCustomer.Items.Add(customer1.name);
             }
         }
+        public void loadValueMaterialTypeCombobox (ComboBox materialTypeCombobox)
+        {
+            cbbMaterialType.Items.Add("Cát");
+            cbbMaterialType.Items.Add("Đá");
+            cbbMaterialType.Items.Add("Gạch");
+            cbbMaterialType.Items.Add("Xà Bần");
+            cbbMaterialType.Items.Add("Đất");
+        }
 
         private void btnAddOrderTruck_Click(object sender, EventArgs e)
         {
-            this.clearOrderTruckTab();
-          // String materialType = cbbMaterialType.SelectedItem.ToString().Trim();
-            if (String.IsNullOrEmpty(cbbMaterialType.))
-            {
-                Console.WriteLine("YYYYYYYYYYYYYYY");
-            }
+            String customerName = "";
+            String materialType = "";
             String note = txtNote.Text.Trim();
-         //   int subTotal = int.Parse(txtSubTotal.Text.Trim());
-            DateTime completedDay = dateTimePicker.Value.ToUniversalTime();
-            Console.WriteLine("=======================");
-            Console.WriteLine(completedDay.ToLocalTime());
-            MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
-            Customer selectedCustomer = new Customer();
-            selectedCustomer = selectedCustomer.findCustomerByName(cbbCustomer.SelectedItem.ToString().Trim(), mongoDBConnection.getMongoData());
-            Console.WriteLine(selectedCustomer._id);
-            OrderTruck newOrderTruck = new OrderTruck();
-            newOrderTruck.customer = selectedCustomer;
-
+            if (cbbCustomer.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please select the customer's name.", "Message");
+            }
+            else if (cbbMaterialType.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please select the material type.", "Message");
+            } else if(String.IsNullOrEmpty(txtSubTotal.Text.Trim()))
+            {
+                MessageBox.Show("Please input the subtotal.", "Message");
+            } else if (dateTimePicker.CustomFormat == " ")
+            {
+                MessageBox.Show("Please select the completed day.", "Message");
+            } else
+            {
+                customerName = cbbCustomer.SelectedItem.ToString().Trim();
+                materialType = cbbMaterialType.SelectedItem.ToString().Trim();
+                MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
+                Customer selectedCustomer = new Customer();
+                selectedCustomer = selectedCustomer.findCustomerByName(customerName, mongoDBConnection.getMongoData());
+                DateTime completedDay = dateTimePicker.Value.ToUniversalTime();
+                OrderTruck newOrderTruck = new OrderTruck();
+                newOrderTruck.customer = selectedCustomer;
+                newOrderTruck.materialType = materialType;
+                newOrderTruck.subtotal = int.Parse(txtSubTotal.Text.Trim());
+                newOrderTruck.note = txtNote.Text.Trim();
+                newOrderTruck.completedDate = completedDay;
+                newOrderTruck.createDate = DateTime.Now.ToUniversalTime();
+                newOrderTruck.modifyDate = DateTime.Now.ToUniversalTime();
+                newOrderTruck.isPaid = ckcIsPaid.Checked;
+                this.clearOrderTruckTab();
+                try
+                {
+                    newOrderTruck.addOrderTruck(mongoDBConnection.getMongoData(), newOrderTruck);
+                    MessageBox.Show("New order truck is add successfully.", "Message");
+                    this.clearOrderTruckTab();
+                } catch(Exception)
+                {
+                    MessageBox.Show("Failed to add new order truck. Please try again.", "Message");
+                }
+            }
         }
         public void clearOrderTruckTab()
         {
@@ -474,6 +513,10 @@ namespace WindowsFormsAppTest
             txtSubTotal.Clear();
             dateTimePicker.CustomFormat = " ";
             dateTimePicker.Format = DateTimePickerFormat.Custom;
+            if (ckcIsPaid.Checked)
+            {
+                ckcIsPaid.Checked = false;
+            }
         }
 
         private void btnUpdateOrderTruck_Click(object sender, EventArgs e)
@@ -484,6 +527,28 @@ namespace WindowsFormsAppTest
         private void btnDeleteOrderTruck_Click(object sender, EventArgs e)
         {
             this.clearOrderTruckTab();
+        }
+
+        private void groupBox5_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ckcIsPaid_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTPStartDay_ValueChanged(object sender, EventArgs e)
+        {
+            dateTPStartDay.CustomFormat = "dd/MM/yyyy";
+        }
+
+        private void dateTPEnday_ValueChanged(object sender, EventArgs e)
+        {
+            // DateTime date = DateTime.ParseExact(dateTPEnday.Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null);
+            // Console.WriteLine(date.ToUniversalTime().ToString());
+            dateTPEnday.CustomFormat = "dd/MM/yyyy";
         }
     }
 }

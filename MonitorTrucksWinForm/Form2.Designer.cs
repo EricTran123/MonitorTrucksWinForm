@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabUser = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -71,7 +71,7 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.tabOrderTruck = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.filterByDay = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.idOrderTruck = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,6 +97,11 @@
             this.lblCustomerName = new System.Windows.Forms.Label();
             this.cbbCustomer = new System.Windows.Forms.ComboBox();
             this.tabTruck = new System.Windows.Forms.TabPage();
+            this.ckcIsPaid = new System.Windows.Forms.CheckBox();
+            this.ckcPaid = new System.Windows.Forms.CheckBox();
+            this.dateTPStartDay = new System.Windows.Forms.DateTimePicker();
+            this.dateTPEnday = new System.Windows.Forms.DateTimePicker();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.tabControl.SuspendLayout();
             this.tabUser.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -111,6 +116,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -254,14 +260,14 @@
             this.dataGridViewUser.Location = new System.Drawing.Point(23, 243);
             this.dataGridViewUser.Name = "dataGridViewUser";
             this.dataGridViewUser.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewUser.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewUser.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewUser.Size = new System.Drawing.Size(876, 287);
             this.dataGridViewUser.TabIndex = 0;
             this.dataGridViewUser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUser_CellClick);
@@ -529,23 +535,24 @@
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.checkBox1);
-            this.groupBox7.Location = new System.Drawing.Point(10, 271);
+            this.groupBox7.Controls.Add(this.groupBox8);
+            this.groupBox7.Controls.Add(this.ckcPaid);
+            this.groupBox7.Location = new System.Drawing.Point(10, 243);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(905, 50);
+            this.groupBox7.Size = new System.Drawing.Size(1014, 64);
             this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Search";
             // 
-            // checkBox1
+            // filterByDay
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(475, 19);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.filterByDay.AutoSize = true;
+            this.filterByDay.Location = new System.Drawing.Point(21, 18);
+            this.filterByDay.Name = "filterByDay";
+            this.filterByDay.Size = new System.Drawing.Size(49, 17);
+            this.filterByDay.TabIndex = 0;
+            this.filterByDay.Text = "Time";
+            this.filterByDay.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -558,7 +565,7 @@
             this.subTotal,
             this.completedDateOrder,
             this.modifyDateOrder});
-            this.dataGridView1.Location = new System.Drawing.Point(10, 327);
+            this.dataGridView1.Location = new System.Drawing.Point(10, 313);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1014, 201);
             this.dataGridView1.TabIndex = 2;
@@ -615,9 +622,9 @@
             this.groupBox6.Controls.Add(this.btnDeleteOrderTruck);
             this.groupBox6.Controls.Add(this.btnUpdateOrderTruck);
             this.groupBox6.Controls.Add(this.btnAddOrderTruck);
-            this.groupBox6.Location = new System.Drawing.Point(10, 180);
+            this.groupBox6.Location = new System.Drawing.Point(10, 168);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(905, 74);
+            this.groupBox6.Size = new System.Drawing.Size(1014, 69);
             this.groupBox6.TabIndex = 1;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Actions";
@@ -654,6 +661,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.ckcIsPaid);
             this.groupBox5.Controls.Add(this.label6);
             this.groupBox5.Controls.Add(this.dateTimePicker);
             this.groupBox5.Controls.Add(this.label5);
@@ -667,16 +675,17 @@
             this.groupBox5.Controls.Add(this.cbbCustomer);
             this.groupBox5.Location = new System.Drawing.Point(10, 6);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(758, 141);
+            this.groupBox5.Size = new System.Drawing.Size(1014, 141);
             this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Orders Truck";
+            this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label6.Location = new System.Drawing.Point(561, 37);
+            this.label6.Location = new System.Drawing.Point(681, 34);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(30, 13);
             this.label6.TabIndex = 10;
@@ -685,7 +694,7 @@
             // dateTimePicker
             // 
             this.dateTimePicker.Checked = false;
-            this.dateTimePicker.Location = new System.Drawing.Point(455, 108);
+            this.dateTimePicker.Location = new System.Drawing.Point(539, 66);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker.TabIndex = 9;
@@ -694,7 +703,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(342, 114);
+            this.label5.Location = new System.Drawing.Point(437, 72);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(83, 13);
             this.label5.TabIndex = 8;
@@ -702,15 +711,15 @@
             // 
             // txtSubTotal
             // 
-            this.txtSubTotal.Location = new System.Drawing.Point(455, 34);
+            this.txtSubTotal.Location = new System.Drawing.Point(539, 31);
             this.txtSubTotal.Name = "txtSubTotal";
-            this.txtSubTotal.Size = new System.Drawing.Size(100, 20);
+            this.txtSubTotal.Size = new System.Drawing.Size(136, 20);
             this.txtSubTotal.TabIndex = 7;
             // 
             // lblSubTotal
             // 
             this.lblSubTotal.AutoSize = true;
-            this.lblSubTotal.Location = new System.Drawing.Point(347, 42);
+            this.lblSubTotal.Location = new System.Drawing.Point(437, 37);
             this.lblSubTotal.Name = "lblSubTotal";
             this.lblSubTotal.Size = new System.Drawing.Size(50, 13);
             this.lblSubTotal.TabIndex = 6;
@@ -720,7 +729,7 @@
             // 
             this.txtNote.Location = new System.Drawing.Point(133, 107);
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(121, 20);
+            this.txtNote.Size = new System.Drawing.Size(387, 20);
             this.txtNote.TabIndex = 5;
             // 
             // lblNote
@@ -778,6 +787,55 @@
             this.tabTruck.Text = "tabPage4";
             this.tabTruck.UseVisualStyleBackColor = true;
             // 
+            // ckcIsPaid
+            // 
+            this.ckcIsPaid.AutoSize = true;
+            this.ckcIsPaid.Location = new System.Drawing.Point(539, 109);
+            this.ckcIsPaid.Name = "ckcIsPaid";
+            this.ckcIsPaid.Size = new System.Drawing.Size(47, 17);
+            this.ckcIsPaid.TabIndex = 3;
+            this.ckcIsPaid.Text = "Paid";
+            this.ckcIsPaid.UseVisualStyleBackColor = true;
+            this.ckcIsPaid.CheckedChanged += new System.EventHandler(this.ckcIsPaid_CheckedChanged);
+            // 
+            // ckcPaid
+            // 
+            this.ckcPaid.AutoSize = true;
+            this.ckcPaid.Location = new System.Drawing.Point(293, 34);
+            this.ckcPaid.Name = "ckcPaid";
+            this.ckcPaid.Size = new System.Drawing.Size(47, 17);
+            this.ckcPaid.TabIndex = 1;
+            this.ckcPaid.Text = "Paid";
+            this.ckcPaid.UseVisualStyleBackColor = true;
+            // 
+            // dateTPStartDay
+            // 
+            this.dateTPStartDay.Location = new System.Drawing.Point(79, 14);
+            this.dateTPStartDay.Name = "dateTPStartDay";
+            this.dateTPStartDay.Size = new System.Drawing.Size(200, 20);
+            this.dateTPStartDay.TabIndex = 2;
+            this.dateTPStartDay.ValueChanged += new System.EventHandler(this.dateTPStartDay_ValueChanged);
+            // 
+            // dateTPEnday
+            // 
+            this.dateTPEnday.Location = new System.Drawing.Point(294, 14);
+            this.dateTPEnday.Name = "dateTPEnday";
+            this.dateTPEnday.Size = new System.Drawing.Size(200, 20);
+            this.dateTPEnday.TabIndex = 3;
+            this.dateTPEnday.ValueChanged += new System.EventHandler(this.dateTPEnday_ValueChanged);
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.filterByDay);
+            this.groupBox8.Controls.Add(this.dateTPEnday);
+            this.groupBox8.Controls.Add(this.dateTPStartDay);
+            this.groupBox8.Location = new System.Drawing.Point(346, 17);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(518, 41);
+            this.groupBox8.TabIndex = 4;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Completed Day";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -806,6 +864,8 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -879,6 +939,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn subTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn completedDateOrder;
         private System.Windows.Forms.DataGridViewTextBoxColumn modifyDateOrder;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox filterByDay;
+        private System.Windows.Forms.CheckBox ckcIsPaid;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.DateTimePicker dateTPEnday;
+        private System.Windows.Forms.DateTimePicker dateTPStartDay;
+        private System.Windows.Forms.CheckBox ckcPaid;
     }
 }
