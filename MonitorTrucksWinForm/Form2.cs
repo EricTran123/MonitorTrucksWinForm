@@ -16,20 +16,22 @@ namespace WindowsFormsAppTest
     public partial class Form2 : Form
     {
         public String selectedCustomer;
+        public String selectedOrderTruck;
         public Form2()
         {
             InitializeComponent();
             this.displayDataTableUser(dataGridViewUser);
             this.displayDataTableCustomer(dataGridViewCustomer);
-            dateTimePicker.CustomFormat = " ";
-            dateTimePicker.Format = DateTimePickerFormat.Custom;
+            this.displayDataTableOrderTruck(dataGridViewOrderTruck);
+            dateTPCompletedDay.CustomFormat = " ";
+            dateTPCompletedDay.Format = DateTimePickerFormat.Custom;
             dateTPStartDay.CustomFormat = " ";
             dateTPStartDay.Format = DateTimePickerFormat.Custom;
             dateTPEnday.CustomFormat = " ";
             dateTPEnday.Format = DateTimePickerFormat.Custom;
             Console.WriteLine("QQQQQQQQQQ");
             DateTime d = new DateTime();
-            d = dateTimePicker.Value;
+            d = dateTPCompletedDay.Value;
             Console.WriteLine(d.ToUniversalTime());
             this.loadValueCustomerCombobox(cbbCustomer);
             this.loadValueMaterialTypeCombobox(cbbMaterialType);
@@ -86,6 +88,19 @@ namespace WindowsFormsAppTest
                 listCustomers[i].createDate.ToLocalTime(), listCustomers[i].modifyDate.ToLocalTime(), listCustomers[i].isActive, listCustomers[i]._id });
             }
             Console.WriteLine(dataGridViewCustomer.ColumnCount);
+        }
+        public void displayDataTableOrderTruck(DataGridView dataGridView)
+        {
+            OrderTruck orderTruckData = new OrderTruck();
+            MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
+            List<OrderTruck> listOrderTrucks = orderTruckData.getAllOrderTrucks(mongoDBConnection.getMongoData());
+            dataGridView.Rows.Clear();
+            dataGridView.Refresh();
+            for (int i = 0; i < listOrderTrucks.Count; i++)
+            {
+                dataGridView.Rows.Add(new object[] { i + 1, listOrderTrucks[i].customer.name, listOrderTrucks[i].materialType, listOrderTrucks[i].note,
+                    listOrderTrucks[i].subtotal,listOrderTrucks[i].completedDate.ToLocalTime(),listOrderTrucks[i].modifyDate.ToLocalTime(), listOrderTrucks[i].isPaid,listOrderTrucks[i]._id});
+            }
         }
 
         private void dataGridViewUser_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -428,11 +443,6 @@ namespace WindowsFormsAppTest
            
         }
 
-        private void dateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-            dateTimePicker.CustomFormat = "dd/MM/yyyy";
-        }
-
         private void tabOrderTruck_Click(object sender, EventArgs e)
         {
             this.loadValueCustomerCombobox(cbbCustomer);
@@ -473,7 +483,7 @@ namespace WindowsFormsAppTest
             } else if(String.IsNullOrEmpty(txtSubTotal.Text.Trim()))
             {
                 MessageBox.Show("Please input the subtotal.", "Message");
-            } else if (dateTimePicker.CustomFormat == " ")
+            } else if (dateTPCompletedDay.CustomFormat == " ")
             {
                 MessageBox.Show("Please select the completed day.", "Message");
             } else
@@ -483,7 +493,7 @@ namespace WindowsFormsAppTest
                 MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
                 Customer selectedCustomer = new Customer();
                 selectedCustomer = selectedCustomer.findCustomerByName(customerName, mongoDBConnection.getMongoData());
-                DateTime completedDay = dateTimePicker.Value.ToUniversalTime();
+                DateTime completedDay = dateTPCompletedDay.Value.ToUniversalTime();
                 OrderTruck newOrderTruck = new OrderTruck();
                 newOrderTruck.customer = selectedCustomer;
                 newOrderTruck.materialType = materialType;
@@ -499,6 +509,7 @@ namespace WindowsFormsAppTest
                     newOrderTruck.addOrderTruck(mongoDBConnection.getMongoData(), newOrderTruck);
                     MessageBox.Show("New order truck is add successfully.", "Message");
                     this.clearOrderTruckTab();
+                    this.displayDataTableOrderTruck(dataGridViewOrderTruck);
                 } catch(Exception)
                 {
                     MessageBox.Show("Failed to add new order truck. Please try again.", "Message");
@@ -511,8 +522,8 @@ namespace WindowsFormsAppTest
             cbbMaterialType.ResetText();
             txtNote.Clear();
             txtSubTotal.Clear();
-            dateTimePicker.CustomFormat = " ";
-            dateTimePicker.Format = DateTimePickerFormat.Custom;
+            dateTPCompletedDay.CustomFormat = " ";
+            dateTPCompletedDay.Format = DateTimePickerFormat.Custom;
             if (ckcIsPaid.Checked)
             {
                 ckcIsPaid.Checked = false;
@@ -549,6 +560,27 @@ namespace WindowsFormsAppTest
             // DateTime date = DateTime.ParseExact(dateTPEnday.Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null);
             // Console.WriteLine(date.ToUniversalTime().ToString());
             dateTPEnday.CustomFormat = "dd/MM/yyyy";
+        }
+
+        private void dataGridViewOrderTruck_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var gridOrderTruck = dataGridViewOrderTruck.Rows[e.RowIndex];
+                cbbCustomer.Text = gridOrderTruck.Cells[1].Value.ToString();
+                cbbMaterialType.Text = gridOrderTruck.Cells[2].Value.ToString();
+                txtNote.Text = gridOrderTruck.Cells[3].Value.ToString();
+                txtSubTotal.Text = gridOrderTruck.Cells[4].Value.ToString();
+                //dateTPCompletedDay.Value = gridOrderTruck.Cells[5].Value.ToString();
+                ckcPaid.Checked = Convert.ToBoolean(gridOrderTruck.Cells[7].Value.ToString());
+                selectedCustomer = gridOrderTruck.Cells[8].Value.ToString();
+                Console.WriteLine(selectedCustomer);
+            }
+        }
+
+        private void dateTPCompletedDay_ValueChanged(object sender, EventArgs e)
+        {
+            dateTPCompletedDay.CustomFormat = "dd/MM/yyyy";
         }
     }
 }

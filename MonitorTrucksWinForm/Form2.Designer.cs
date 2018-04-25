@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabUser = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -71,22 +71,20 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.tabOrderTruck = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.filterByDay = new System.Windows.Forms.CheckBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idOrderTruck = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.materialType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.note = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.completedDateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modifyDateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateTPEnday = new System.Windows.Forms.DateTimePicker();
+            this.dateTPStartDay = new System.Windows.Forms.DateTimePicker();
+            this.ckcPaid = new System.Windows.Forms.CheckBox();
+            this.dataGridViewOrderTruck = new System.Windows.Forms.DataGridView();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnDeleteOrderTruck = new System.Windows.Forms.Button();
             this.btnUpdateOrderTruck = new System.Windows.Forms.Button();
             this.btnAddOrderTruck = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.ckcIsPaid = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.dateTPCompletedDay = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.txtSubTotal = new System.Windows.Forms.TextBox();
             this.lblSubTotal = new System.Windows.Forms.Label();
@@ -97,11 +95,15 @@
             this.lblCustomerName = new System.Windows.Forms.Label();
             this.cbbCustomer = new System.Windows.Forms.ComboBox();
             this.tabTruck = new System.Windows.Forms.TabPage();
-            this.ckcIsPaid = new System.Windows.Forms.CheckBox();
-            this.ckcPaid = new System.Windows.Forms.CheckBox();
-            this.dateTPStartDay = new System.Windows.Forms.DateTimePicker();
-            this.dateTPEnday = new System.Windows.Forms.DateTimePicker();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.idOrderTruck = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.materialType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.note = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.completedDateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modifyDateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Paid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.idMongoOrderTruck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabUser.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -113,10 +115,10 @@
             this.groupBox3.SuspendLayout();
             this.tabOrderTruck.SuspendLayout();
             this.groupBox7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderTruck)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.groupBox8.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -128,7 +130,7 @@
             this.tabControl.Location = new System.Drawing.Point(-2, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1060, 599);
+            this.tabControl.Size = new System.Drawing.Size(1082, 599);
             this.tabControl.TabIndex = 0;
             // 
             // tabUser
@@ -260,14 +262,14 @@
             this.dataGridViewUser.Location = new System.Drawing.Point(23, 243);
             this.dataGridViewUser.Name = "dataGridViewUser";
             this.dataGridViewUser.ReadOnly = true;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewUser.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewUser.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewUser.Size = new System.Drawing.Size(876, 287);
             this.dataGridViewUser.TabIndex = 0;
             this.dataGridViewUser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUser_CellClick);
@@ -521,13 +523,13 @@
             // tabOrderTruck
             // 
             this.tabOrderTruck.Controls.Add(this.groupBox7);
-            this.tabOrderTruck.Controls.Add(this.dataGridView1);
+            this.tabOrderTruck.Controls.Add(this.dataGridViewOrderTruck);
             this.tabOrderTruck.Controls.Add(this.groupBox6);
             this.tabOrderTruck.Controls.Add(this.groupBox5);
             this.tabOrderTruck.Location = new System.Drawing.Point(4, 22);
             this.tabOrderTruck.Name = "tabOrderTruck";
             this.tabOrderTruck.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOrderTruck.Size = new System.Drawing.Size(1052, 573);
+            this.tabOrderTruck.Size = new System.Drawing.Size(1074, 573);
             this.tabOrderTruck.TabIndex = 2;
             this.tabOrderTruck.Text = "OrderTrucks";
             this.tabOrderTruck.UseVisualStyleBackColor = true;
@@ -544,6 +546,18 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Search";
             // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.filterByDay);
+            this.groupBox8.Controls.Add(this.dateTPEnday);
+            this.groupBox8.Controls.Add(this.dateTPStartDay);
+            this.groupBox8.Location = new System.Drawing.Point(346, 17);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(518, 41);
+            this.groupBox8.TabIndex = 4;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Completed Day";
+            // 
             // filterByDay
             // 
             this.filterByDay.AutoSize = true;
@@ -554,68 +568,50 @@
             this.filterByDay.Text = "Time";
             this.filterByDay.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dateTPEnday
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dateTPEnday.Location = new System.Drawing.Point(294, 14);
+            this.dateTPEnday.Name = "dateTPEnday";
+            this.dateTPEnday.Size = new System.Drawing.Size(200, 20);
+            this.dateTPEnday.TabIndex = 3;
+            this.dateTPEnday.ValueChanged += new System.EventHandler(this.dateTPEnday_ValueChanged);
+            // 
+            // dateTPStartDay
+            // 
+            this.dateTPStartDay.Location = new System.Drawing.Point(79, 14);
+            this.dateTPStartDay.Name = "dateTPStartDay";
+            this.dateTPStartDay.Size = new System.Drawing.Size(200, 20);
+            this.dateTPStartDay.TabIndex = 2;
+            this.dateTPStartDay.ValueChanged += new System.EventHandler(this.dateTPStartDay_ValueChanged);
+            // 
+            // ckcPaid
+            // 
+            this.ckcPaid.AutoSize = true;
+            this.ckcPaid.Location = new System.Drawing.Point(293, 34);
+            this.ckcPaid.Name = "ckcPaid";
+            this.ckcPaid.Size = new System.Drawing.Size(47, 17);
+            this.ckcPaid.TabIndex = 1;
+            this.ckcPaid.Text = "Paid";
+            this.ckcPaid.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewOrderTruck
+            // 
+            this.dataGridViewOrderTruck.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewOrderTruck.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idOrderTruck,
             this.customer,
             this.materialType,
             this.note,
             this.subTotal,
             this.completedDateOrder,
-            this.modifyDateOrder});
-            this.dataGridView1.Location = new System.Drawing.Point(10, 313);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1014, 201);
-            this.dataGridView1.TabIndex = 2;
-            // 
-            // idOrderTruck
-            // 
-            this.idOrderTruck.HeaderText = "ID";
-            this.idOrderTruck.Name = "idOrderTruck";
-            this.idOrderTruck.ReadOnly = true;
-            this.idOrderTruck.Width = 80;
-            // 
-            // customer
-            // 
-            this.customer.HeaderText = "Customer";
-            this.customer.Name = "customer";
-            this.customer.Width = 150;
-            // 
-            // materialType
-            // 
-            this.materialType.HeaderText = "Material Types";
-            this.materialType.Name = "materialType";
-            this.materialType.ReadOnly = true;
-            this.materialType.Width = 120;
-            // 
-            // note
-            // 
-            this.note.HeaderText = "Note";
-            this.note.Name = "note";
-            this.note.Width = 200;
-            // 
-            // subTotal
-            // 
-            this.subTotal.HeaderText = "SubTotal";
-            this.subTotal.Name = "subTotal";
-            this.subTotal.ReadOnly = true;
-            this.subTotal.Width = 120;
-            // 
-            // completedDateOrder
-            // 
-            this.completedDateOrder.HeaderText = "Completed Date";
-            this.completedDateOrder.Name = "completedDateOrder";
-            this.completedDateOrder.ReadOnly = true;
-            this.completedDateOrder.Width = 150;
-            // 
-            // modifyDateOrder
-            // 
-            this.modifyDateOrder.HeaderText = "ModifyDate";
-            this.modifyDateOrder.Name = "modifyDateOrder";
-            this.modifyDateOrder.ReadOnly = true;
-            this.modifyDateOrder.Width = 150;
+            this.modifyDateOrder,
+            this.Paid,
+            this.idMongoOrderTruck});
+            this.dataGridViewOrderTruck.Location = new System.Drawing.Point(10, 313);
+            this.dataGridViewOrderTruck.Name = "dataGridViewOrderTruck";
+            this.dataGridViewOrderTruck.Size = new System.Drawing.Size(1034, 257);
+            this.dataGridViewOrderTruck.TabIndex = 2;
+            this.dataGridViewOrderTruck.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewOrderTruck_CellClick);
             // 
             // groupBox6
             // 
@@ -663,7 +659,7 @@
             // 
             this.groupBox5.Controls.Add(this.ckcIsPaid);
             this.groupBox5.Controls.Add(this.label6);
-            this.groupBox5.Controls.Add(this.dateTimePicker);
+            this.groupBox5.Controls.Add(this.dateTPCompletedDay);
             this.groupBox5.Controls.Add(this.label5);
             this.groupBox5.Controls.Add(this.txtSubTotal);
             this.groupBox5.Controls.Add(this.lblSubTotal);
@@ -681,6 +677,17 @@
             this.groupBox5.Text = "Orders Truck";
             this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
             // 
+            // ckcIsPaid
+            // 
+            this.ckcIsPaid.AutoSize = true;
+            this.ckcIsPaid.Location = new System.Drawing.Point(539, 109);
+            this.ckcIsPaid.Name = "ckcIsPaid";
+            this.ckcIsPaid.Size = new System.Drawing.Size(47, 17);
+            this.ckcIsPaid.TabIndex = 3;
+            this.ckcIsPaid.Text = "Paid";
+            this.ckcIsPaid.UseVisualStyleBackColor = true;
+            this.ckcIsPaid.CheckedChanged += new System.EventHandler(this.ckcIsPaid_CheckedChanged);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -691,14 +698,14 @@
             this.label6.TabIndex = 10;
             this.label6.Text = "VND";
             // 
-            // dateTimePicker
+            // dateTPCompletedDay
             // 
-            this.dateTimePicker.Checked = false;
-            this.dateTimePicker.Location = new System.Drawing.Point(539, 66);
-            this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker.TabIndex = 9;
-            this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker_ValueChanged);
+            this.dateTPCompletedDay.Checked = false;
+            this.dateTPCompletedDay.Location = new System.Drawing.Point(539, 66);
+            this.dateTPCompletedDay.Name = "dateTPCompletedDay";
+            this.dateTPCompletedDay.Size = new System.Drawing.Size(200, 20);
+            this.dateTPCompletedDay.TabIndex = 9;
+            this.dateTPCompletedDay.ValueChanged += new System.EventHandler(this.dateTPCompletedDay_ValueChanged);
             // 
             // label5
             // 
@@ -787,60 +794,71 @@
             this.tabTruck.Text = "tabPage4";
             this.tabTruck.UseVisualStyleBackColor = true;
             // 
-            // ckcIsPaid
+            // idOrderTruck
             // 
-            this.ckcIsPaid.AutoSize = true;
-            this.ckcIsPaid.Location = new System.Drawing.Point(539, 109);
-            this.ckcIsPaid.Name = "ckcIsPaid";
-            this.ckcIsPaid.Size = new System.Drawing.Size(47, 17);
-            this.ckcIsPaid.TabIndex = 3;
-            this.ckcIsPaid.Text = "Paid";
-            this.ckcIsPaid.UseVisualStyleBackColor = true;
-            this.ckcIsPaid.CheckedChanged += new System.EventHandler(this.ckcIsPaid_CheckedChanged);
+            this.idOrderTruck.HeaderText = "ID";
+            this.idOrderTruck.Name = "idOrderTruck";
+            this.idOrderTruck.ReadOnly = true;
+            this.idOrderTruck.Width = 60;
             // 
-            // ckcPaid
+            // customer
             // 
-            this.ckcPaid.AutoSize = true;
-            this.ckcPaid.Location = new System.Drawing.Point(293, 34);
-            this.ckcPaid.Name = "ckcPaid";
-            this.ckcPaid.Size = new System.Drawing.Size(47, 17);
-            this.ckcPaid.TabIndex = 1;
-            this.ckcPaid.Text = "Paid";
-            this.ckcPaid.UseVisualStyleBackColor = true;
+            this.customer.HeaderText = "Customer";
+            this.customer.Name = "customer";
+            this.customer.Width = 120;
             // 
-            // dateTPStartDay
+            // materialType
             // 
-            this.dateTPStartDay.Location = new System.Drawing.Point(79, 14);
-            this.dateTPStartDay.Name = "dateTPStartDay";
-            this.dateTPStartDay.Size = new System.Drawing.Size(200, 20);
-            this.dateTPStartDay.TabIndex = 2;
-            this.dateTPStartDay.ValueChanged += new System.EventHandler(this.dateTPStartDay_ValueChanged);
+            this.materialType.HeaderText = "Material Types";
+            this.materialType.Name = "materialType";
+            this.materialType.ReadOnly = true;
+            this.materialType.Width = 120;
             // 
-            // dateTPEnday
+            // note
             // 
-            this.dateTPEnday.Location = new System.Drawing.Point(294, 14);
-            this.dateTPEnday.Name = "dateTPEnday";
-            this.dateTPEnday.Size = new System.Drawing.Size(200, 20);
-            this.dateTPEnday.TabIndex = 3;
-            this.dateTPEnday.ValueChanged += new System.EventHandler(this.dateTPEnday_ValueChanged);
+            this.note.HeaderText = "Note";
+            this.note.Name = "note";
+            this.note.Width = 200;
             // 
-            // groupBox8
+            // subTotal
             // 
-            this.groupBox8.Controls.Add(this.filterByDay);
-            this.groupBox8.Controls.Add(this.dateTPEnday);
-            this.groupBox8.Controls.Add(this.dateTPStartDay);
-            this.groupBox8.Location = new System.Drawing.Point(346, 17);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(518, 41);
-            this.groupBox8.TabIndex = 4;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Completed Day";
+            this.subTotal.HeaderText = "SubTotal";
+            this.subTotal.Name = "subTotal";
+            this.subTotal.ReadOnly = true;
+            this.subTotal.Width = 120;
+            // 
+            // completedDateOrder
+            // 
+            this.completedDateOrder.HeaderText = "Completed Date";
+            this.completedDateOrder.Name = "completedDateOrder";
+            this.completedDateOrder.ReadOnly = true;
+            this.completedDateOrder.Width = 135;
+            // 
+            // modifyDateOrder
+            // 
+            this.modifyDateOrder.HeaderText = "ModifyDate";
+            this.modifyDateOrder.Name = "modifyDateOrder";
+            this.modifyDateOrder.ReadOnly = true;
+            this.modifyDateOrder.Width = 135;
+            // 
+            // Paid
+            // 
+            this.Paid.HeaderText = "Paid";
+            this.Paid.Name = "Paid";
+            this.Paid.ReadOnly = true;
+            // 
+            // idMongoOrderTruck
+            // 
+            this.idMongoOrderTruck.HeaderText = "idMongoOrderTruck";
+            this.idMongoOrderTruck.Name = "idMongoOrderTruck";
+            this.idMongoOrderTruck.ReadOnly = true;
+            this.idMongoOrderTruck.Visible = false;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1058, 600);
+            this.ClientSize = new System.Drawing.Size(1076, 600);
             this.Controls.Add(this.tabControl);
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -860,12 +878,12 @@
             this.tabOrderTruck.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderTruck)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -914,7 +932,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn modifyDate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isActiveCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn idMongoDB;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewOrderTruck;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ComboBox cbbCustomer;
@@ -930,8 +948,14 @@
         private System.Windows.Forms.Label lblSubTotal;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker;
+        private System.Windows.Forms.DateTimePicker dateTPCompletedDay;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox filterByDay;
+        private System.Windows.Forms.CheckBox ckcIsPaid;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.DateTimePicker dateTPEnday;
+        private System.Windows.Forms.DateTimePicker dateTPStartDay;
+        private System.Windows.Forms.CheckBox ckcPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn idOrderTruck;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer;
         private System.Windows.Forms.DataGridViewTextBoxColumn materialType;
@@ -939,11 +963,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn subTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn completedDateOrder;
         private System.Windows.Forms.DataGridViewTextBoxColumn modifyDateOrder;
-        private System.Windows.Forms.CheckBox filterByDay;
-        private System.Windows.Forms.CheckBox ckcIsPaid;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.DateTimePicker dateTPEnday;
-        private System.Windows.Forms.DateTimePicker dateTPStartDay;
-        private System.Windows.Forms.CheckBox ckcPaid;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Paid;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn idMongoOrderTruck;
     }
 }

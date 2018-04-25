@@ -11,6 +11,7 @@ namespace WindowsFormsAppTest.Model
 {
     class OrderTruck
     {
+        public ObjectId _id { get; set; }
         public Customer customer { get; set; }
         public String materialType { get; set; }
         public int subtotal { get; set; }
@@ -19,7 +20,20 @@ namespace WindowsFormsAppTest.Model
         public DateTime completedDate { get; set; }
         public DateTime modifyDate { get; set; }
         public bool isPaid { get; set; }
+        
 
+        public List<OrderTruck> getAllOrderTrucks(IMongoDatabase mongoDatabase)
+        {
+            try
+            {
+                var collection = mongoDatabase.GetCollection<OrderTruck>("ordertrucks");
+                return collection.Find(x => (x.customer != null)).SortBy(x => x.completedDate).ToList();
+            } catch (Exception e)
+            {
+                return null;
+                throw e;
+            }
+        }
         public void addOrderTruck(IMongoDatabase mongoDatabase, OrderTruck newOrderTruck)
         {
             try
