@@ -34,6 +34,18 @@ namespace WindowsFormsAppTest.Model
                 throw e;
             }
         }
+        public OrderTruck getOrderTruckByID(IMongoDatabase mongoDatabase, String id)
+        {
+            try
+            {
+                var collection = mongoDatabase.GetCollection<OrderTruck>("ordertrucks");
+                return collection.Find(Builders<OrderTruck>.Filter.Eq("_id", ObjectId.Parse(id))).FirstOrDefault(); ;
+            } catch (Exception e)
+            {
+                return null;
+                throw e;
+            }
+        }
         public void addOrderTruck(IMongoDatabase mongoDatabase, OrderTruck newOrderTruck)
         {
             try
@@ -82,6 +94,60 @@ namespace WindowsFormsAppTest.Model
             } else
             {
                 return null;
+            }
+        }
+        public void updateOrderTruck (IMongoDatabase mongoDatabase, OrderTruck currentOrderTruck, OrderTruck updatedOrderTruck)
+        {
+            if ( currentOrderTruck != null && updatedOrderTruck != null)
+            {
+                try
+                {
+                    var collection = mongoDatabase.GetCollection<OrderTruck>("ordertrucks");
+                    if (!currentOrderTruck.customer.Equals(updatedOrderTruck.customer) || !currentOrderTruck.materialType.Equals(updatedOrderTruck.materialType)
+                        || !currentOrderTruck.note.Equals(updatedOrderTruck.note) || !currentOrderTruck.subtotal.Equals(updatedOrderTruck.subtotal)
+                        || !currentOrderTruck.completedDate.Equals(updatedOrderTruck.completedDate) || !currentOrderTruck.isPaid.Equals(updatedOrderTruck.isPaid))
+                    {
+                        if (!currentOrderTruck.customer.Equals(updatedOrderTruck.customer))
+                        {
+                            collection.FindOneAndUpdate(Builders<OrderTruck>.Filter.Eq("_id", ObjectId.Parse(currentOrderTruck._id.ToString())), Builders<OrderTruck>.Update.Set("customer", updatedOrderTruck.customer));
+                        }
+                        if (!currentOrderTruck.materialType.Equals(updatedOrderTruck.materialType))
+                        {
+                            collection.FindOneAndUpdate(Builders<OrderTruck>.Filter.Eq("_id", ObjectId.Parse(currentOrderTruck._id.ToString())), Builders<OrderTruck>.Update.Set("materialType", updatedOrderTruck.materialType));
+                        }
+                        if (!currentOrderTruck.note.Equals(updatedOrderTruck.note))
+                        {
+                            collection.FindOneAndUpdate(Builders<OrderTruck>.Filter.Eq("_id", ObjectId.Parse(currentOrderTruck._id.ToString())), Builders<OrderTruck>.Update.Set("note", updatedOrderTruck.note));
+                        }
+                        if (!currentOrderTruck.subtotal.Equals(updatedOrderTruck.subtotal))
+                        {
+                            collection.FindOneAndUpdate(Builders<OrderTruck>.Filter.Eq("_id", ObjectId.Parse(currentOrderTruck._id.ToString())), Builders<OrderTruck>.Update.Set("subtotal", updatedOrderTruck.subtotal));
+                        }
+                        if (!currentOrderTruck.completedDate.Equals(updatedOrderTruck.completedDate))
+                        {
+                            collection.FindOneAndUpdate(Builders<OrderTruck>.Filter.Eq("_id", ObjectId.Parse(currentOrderTruck._id.ToString())), Builders<OrderTruck>.Update.Set("completedDate", updatedOrderTruck.completedDate));
+                        }
+                        if (!currentOrderTruck.isPaid.Equals(updatedOrderTruck.isPaid))
+                        {
+                            collection.FindOneAndUpdate(Builders<OrderTruck>.Filter.Eq("_id", ObjectId.Parse(currentOrderTruck._id.ToString())), Builders<OrderTruck>.Update.Set("isPaid", updatedOrderTruck.isPaid));
+                        }
+                        collection.FindOneAndUpdate(Builders<OrderTruck>.Filter.Eq("_id", ObjectId.Parse(currentOrderTruck._id.ToString())), Builders<OrderTruck>.Update.Set("modifyDate", updatedOrderTruck.modifyDate));
+                    }
+                } catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+        public void updateOrderTruckByCustomer (IMongoDatabase mongoDatabase, Customer updateCustomer)
+        {
+            try
+            {
+                var collection = mongoDatabase.GetCollection<OrderTruck>("ordertrucks");
+                collection.UpdateManyAsync(x => x.customer._id.Equals(updateCustomer._id), Builders<OrderTruck>.Update.Set("customer", updateCustomer));
+            } catch (Exception e)
+            {
+                throw e;
             }
         }
     }

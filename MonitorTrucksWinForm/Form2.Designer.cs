@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabUser = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAddUser = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnUpdateUser = new System.Windows.Forms.Button();
+            this.btnDeleteUser = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.ckcActive = new System.Windows.Forms.CheckBox();
@@ -141,7 +141,7 @@
             this.tabUser.Location = new System.Drawing.Point(4, 22);
             this.tabUser.Name = "tabUser";
             this.tabUser.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUser.Size = new System.Drawing.Size(1052, 573);
+            this.tabUser.Size = new System.Drawing.Size(1074, 573);
             this.tabUser.TabIndex = 0;
             this.tabUser.Text = "User";
             this.tabUser.UseVisualStyleBackColor = true;
@@ -150,8 +150,8 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnAddUser);
-            this.groupBox2.Controls.Add(this.btnUpdate);
-            this.groupBox2.Controls.Add(this.btnDelete);
+            this.groupBox2.Controls.Add(this.btnUpdateUser);
+            this.groupBox2.Controls.Add(this.btnDeleteUser);
             this.groupBox2.Location = new System.Drawing.Point(23, 155);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(744, 82);
@@ -169,25 +169,25 @@
             this.btnAddUser.UseVisualStyleBackColor = true;
             this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
             // 
-            // btnUpdate
+            // btnUpdateUser
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(254, 19);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(140, 40);
-            this.btnUpdate.TabIndex = 2;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btnUpdateUser.Location = new System.Drawing.Point(254, 19);
+            this.btnUpdateUser.Name = "btnUpdateUser";
+            this.btnUpdateUser.Size = new System.Drawing.Size(140, 40);
+            this.btnUpdateUser.TabIndex = 2;
+            this.btnUpdateUser.Text = "Update";
+            this.btnUpdateUser.UseVisualStyleBackColor = true;
+            this.btnUpdateUser.Click += new System.EventHandler(this.btnUpdateUser_Click);
             // 
-            // btnDelete
+            // btnDeleteUser
             // 
-            this.btnDelete.Location = new System.Drawing.Point(482, 19);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(140, 40);
-            this.btnDelete.TabIndex = 3;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDeleteUser.Location = new System.Drawing.Point(482, 19);
+            this.btnDeleteUser.Name = "btnDeleteUser";
+            this.btnDeleteUser.Size = new System.Drawing.Size(140, 40);
+            this.btnDeleteUser.TabIndex = 3;
+            this.btnDeleteUser.Text = "Delete";
+            this.btnDeleteUser.UseVisualStyleBackColor = true;
+            this.btnDeleteUser.Click += new System.EventHandler(this.btnDeleteUser_Click);
             // 
             // groupBox1
             // 
@@ -262,14 +262,14 @@
             this.dataGridViewUser.Location = new System.Drawing.Point(23, 243);
             this.dataGridViewUser.Name = "dataGridViewUser";
             this.dataGridViewUser.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewUser.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewUser.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewUser.Size = new System.Drawing.Size(876, 287);
             this.dataGridViewUser.TabIndex = 0;
             this.dataGridViewUser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUser_CellClick);
@@ -316,7 +316,7 @@
             this.tabCustomer.Location = new System.Drawing.Point(4, 22);
             this.tabCustomer.Name = "tabCustomer";
             this.tabCustomer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCustomer.Size = new System.Drawing.Size(1052, 573);
+            this.tabCustomer.Size = new System.Drawing.Size(1074, 573);
             this.tabCustomer.TabIndex = 1;
             this.tabCustomer.Text = "Customers";
             this.tabCustomer.UseVisualStyleBackColor = true;
@@ -789,7 +789,7 @@
             this.tabTruck.Location = new System.Drawing.Point(4, 22);
             this.tabTruck.Name = "tabTruck";
             this.tabTruck.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTruck.Size = new System.Drawing.Size(1052, 573);
+            this.tabTruck.Size = new System.Drawing.Size(1074, 573);
             this.tabTruck.TabIndex = 3;
             this.tabTruck.Text = "tabPage4";
             this.tabTruck.UseVisualStyleBackColor = true;
@@ -805,6 +805,7 @@
             // 
             this.customer.HeaderText = "Customer";
             this.customer.Name = "customer";
+            this.customer.ReadOnly = true;
             this.customer.Width = 120;
             // 
             // materialType
@@ -818,6 +819,7 @@
             // 
             this.note.HeaderText = "Note";
             this.note.Name = "note";
+            this.note.ReadOnly = true;
             this.note.Width = 200;
             // 
             // subTotal
@@ -898,8 +900,8 @@
         private System.Windows.Forms.DataGridView dataGridViewUser;
         private System.Windows.Forms.CheckBox ckcActive;
         private System.Windows.Forms.Label lblUsername;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnDeleteUser;
+        private System.Windows.Forms.Button btnUpdateUser;
         private System.Windows.Forms.Button btnAddUser;
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.TextBox txtPassword;
