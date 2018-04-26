@@ -656,5 +656,11 @@ namespace WindowsFormsAppTest
         {
             dateTPCompletedDay.CustomFormat = "dd/MM/yyyy";
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
