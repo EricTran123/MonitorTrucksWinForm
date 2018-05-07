@@ -77,7 +77,7 @@
             this.cbbSearchCustomer = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.filterByDay = new System.Windows.Forms.CheckBox();
+            this.ckcfilterByDay = new System.Windows.Forms.CheckBox();
             this.dateTPEnday = new System.Windows.Forms.DateTimePicker();
             this.dateTPStartDay = new System.Windows.Forms.DateTimePicker();
             this.ckcSearchPaid = new System.Windows.Forms.CheckBox();
@@ -602,7 +602,7 @@
             // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.filterByDay);
+            this.groupBox8.Controls.Add(this.ckcfilterByDay);
             this.groupBox8.Controls.Add(this.dateTPEnday);
             this.groupBox8.Controls.Add(this.dateTPStartDay);
             this.groupBox8.Location = new System.Drawing.Point(475, 17);
@@ -612,15 +612,15 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Completed Day";
             // 
-            // filterByDay
+            // ckcfilterByDay
             // 
-            this.filterByDay.AutoSize = true;
-            this.filterByDay.Location = new System.Drawing.Point(21, 18);
-            this.filterByDay.Name = "filterByDay";
-            this.filterByDay.Size = new System.Drawing.Size(49, 17);
-            this.filterByDay.TabIndex = 0;
-            this.filterByDay.Text = "Time";
-            this.filterByDay.UseVisualStyleBackColor = true;
+            this.ckcfilterByDay.AutoSize = true;
+            this.ckcfilterByDay.Location = new System.Drawing.Point(21, 18);
+            this.ckcfilterByDay.Name = "ckcfilterByDay";
+            this.ckcfilterByDay.Size = new System.Drawing.Size(49, 17);
+            this.ckcfilterByDay.TabIndex = 0;
+            this.ckcfilterByDay.Text = "Time";
+            this.ckcfilterByDay.UseVisualStyleBackColor = true;
             // 
             // dateTPEnday
             // 
@@ -1006,7 +1006,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dateTPCompletedDay;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.CheckBox filterByDay;
+        private System.Windows.Forms.CheckBox ckcfilterByDay;
         private System.Windows.Forms.CheckBox ckcIsPaid;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.DateTimePicker dateTPEnday;

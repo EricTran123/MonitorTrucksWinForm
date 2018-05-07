@@ -17,6 +17,9 @@ namespace WindowsFormsAppTest
     {
         public String selectedCustomer;
         public String selectedOrderTruck;
+        private List<OrderTruck> listOrderTrucksFilter;
+        private DateTime startDayFilter = new DateTime();
+        private DateTime endDayFilter = new DateTime();
         public Form2()
         {
             InitializeComponent();
@@ -93,6 +96,7 @@ namespace WindowsFormsAppTest
             OrderTruck orderTruckData = new OrderTruck();
             MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
             List<OrderTruck> listOrderTrucks = orderTruckData.getAllOrderTrucks(mongoDBConnection.getMongoData());
+            listOrderTrucksFilter = listOrderTrucks;
             dataGridView.Rows.Clear();
             dataGridView.Refresh();
             for (int i = 0; i < listOrderTrucks.Count; i++)
@@ -641,6 +645,10 @@ namespace WindowsFormsAppTest
         private void dateTPStartDay_ValueChanged(object sender, EventArgs e)
         {
             dateTPStartDay.CustomFormat = "dd/MM/yyyy";
+            startDayFilter = dateTPStartDay.Value.ToUniversalTime();
+            startDayFilter = Convert.ToDateTime(startDayFilter.ToString("dd/MM/yyyy"));
+            Console.WriteLine("StartDay: ");
+            Console.WriteLine(startDayFilter);
         }
 
         private void dateTPEnday_ValueChanged(object sender, EventArgs e)
@@ -648,9 +656,11 @@ namespace WindowsFormsAppTest
             // DateTime date = DateTime.ParseExact(dateTPEnday.Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null);
             // Console.WriteLine(date.ToUniversalTime().ToString());
             dateTPEnday.CustomFormat = "dd/MM/yyyy";
+            endDayFilter = dateTPEnday.Value.ToUniversalTime();
+            endDayFilter = Convert.ToDateTime(endDayFilter.ToString("dd/MM/yyyy"));
+            Console.WriteLine("EndDay: ");
+            Console.WriteLine(endDayFilter);
         }
-
-
 
         private void dateTPCompletedDay_ValueChanged(object sender, EventArgs e)
         {
@@ -659,7 +669,88 @@ namespace WindowsFormsAppTest
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            List<OrderTruck> resultFilter = new List<OrderTruck>();
+            if (cbbSearchCustomer.SelectedIndex >= 0)
+            {
+                resultFilter = listOrderTrucksFilter.Where(orderTruck => orderTruck.customer.name
+                .Equals(cbbSearchCustomer.SelectedItem.ToString().Trim()))
+                .Cast<OrderTruck>().ToList();
+            }
+            if (cbbSearchMaterialType.SelectedIndex >= 0)
+            {
+                resultFilter = resultFilter.Where(orderTruck => orderTruck.materialType
+                .Equals(cbbSearchMaterialType.SelectedItem.ToString().Trim()))
+                .Cast<OrderTruck>().ToList();
 
+            }
+            if (ckcSearchPaid.Checked)
+            {
+                resultFilter = resultFilter.Where(orderTruck => orderTruck.isPaid).
+                    Cast<OrderTruck>().ToList();
+            }
+            if (ckcfilterByDay.Checked)
+            {
+                if (startDayFilter > endDayFilter)
+                {
+                    MessageBox.Show("End time must be greater than Start time.", "Message");
+                } else
+                {
+                    resultFilter = listOrderTrucksFilter.Where(orderTruck => (Convert.ToDateTime(orderTruck.completedDate.ToString("dd/MM/yyyy")) >= startDayFilter) &&
+                    Convert.ToDateTime(orderTruck.completedDate.ToString("dd/MM/yyyy")) <= endDayFilter)
+                        .Cast<OrderTruck>().ToList();
+                }
+            }
+        }
+        public void exportToExcel(DataGridView dataGridView)
+        {
+            Microsoft.Office.Interop.Excel._Application excel = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel._Workbook workbook = excel.Workbooks.Add(Type.Missing);
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+            try
+            {
+                excel.Visible = true;
+                worksheet = workbook.ActiveSheet;
+                worksheet.Name = "ExportedFromDatGrid";
+                for (int i = 0; i < dataGridView.Columns.Count; i++)
+                {
+                    if (dataGridView.Columns[i].Visible)
+                    {
+                        worksheet.Cells[1, i + 1] = dataGridView.Columns[i].HeaderText;
+                    }    
+                }
+                for (int i = 0; i < dataGridView.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dataGridView.Columns.Count; j++)
+                    {
+                       if (dataGridView.Columns[i].Visible)
+                        {
+                            if (dataGridView.Rows[i].Cells[j].Value != null)
+                            {
+                                worksheet.Cells[i + 2, j + 1] = dataGridView.Rows[i].Cells[j].Value.ToString();
+                            } else
+                            {
+                                worksheet.Cells[i + 2, j + 1] = "";
+                            }
+                        }
+                    }
+                }
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+                saveFileDialog.FilterIndex = 2;
+                if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    workbook.SaveAs(saveFileDialog.FileName);
+                    MessageBox.Show("Export Successful", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            } catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            } finally
+            {
+                excel.Quit();
+                workbook = null;
+                excel = null;
+            }
         }
 
     }
