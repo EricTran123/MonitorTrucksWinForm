@@ -150,5 +150,17 @@ namespace WindowsFormsAppTest.Model
                 throw e;
             }
         }
+        public void deleteOrderTruck(IMongoDatabase mongoDatabase, String _id)
+        {
+            try
+            {
+                var collection = mongoDatabase.GetCollection<OrderTruck>("ordertrucks");
+                collection.FindOneAndDeleteAsync(Builders<OrderTruck>.Filter.Eq("_id", ObjectId.Parse(_id)));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

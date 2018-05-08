@@ -23,7 +23,6 @@ namespace WindowsFormsAppTest
         public Form2()
         {
             InitializeComponent();
-
             this.displayDataTableUser(dataGridViewUser);
             this.displayDataTableCustomer(dataGridViewCustomer);
             this.displayDataTableOrderTruck(dataGridViewOrderTruck);
@@ -42,7 +41,11 @@ namespace WindowsFormsAppTest
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            Console.WriteLine("Open form 2");
+           // Console.WriteLine("Open form 2");
+            //dataGridViewOrderTruck.ColumnHeadersDefaultCellStyle.BackColor = Color.Green;
+          //  dataGridViewOrderTruck.ColumnHeadersHeight = 50;
+           // dataGridViewOrderTruck.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridViewOrderTruck.ColumnHeadersDefaultCellStyle.Font, FontStyle.Bold);
+           // dataGridViewOrderTruck.EnableHeadersVisualStyles =  false;
         }
         private void userPage_Click(object sender, EventArgs e)
         {
@@ -97,12 +100,17 @@ namespace WindowsFormsAppTest
             MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
             List<OrderTruck> listOrderTrucks = orderTruckData.getAllOrderTrucks(mongoDBConnection.getMongoData());
             listOrderTrucksFilter = listOrderTrucks;
+            this.viewDataTableOrdertruck(dataGridViewOrderTruck, listOrderTrucks);
+        }
+        private void viewDataTableOrdertruck(DataGridView dataGridView, List<OrderTruck> listOrderTrucks)
+        {
             dataGridView.Rows.Clear();
             dataGridView.Refresh();
+            dataGridView.Columns["SubTotal"].DefaultCellStyle.Format = "C";
             for (int i = 0; i < listOrderTrucks.Count; i++)
             {
                 dataGridView.Rows.Add(new object[] { i + 1, listOrderTrucks[i].customer.name, listOrderTrucks[i].materialType, listOrderTrucks[i].note,
-                    listOrderTrucks[i].subtotal,listOrderTrucks[i].completedDate.ToLocalTime(),listOrderTrucks[i].modifyDate.ToLocalTime(), listOrderTrucks[i].isPaid,listOrderTrucks[i]._id});
+                    listOrderTrucks[i].subtotal,listOrderTrucks[i].completedDate.ToLocalTime().ToString("dd/MM/yyyy"),listOrderTrucks[i].modifyDate.ToLocalTime().ToString("dd/MM/yyyy"), listOrderTrucks[i].isPaid,listOrderTrucks[i]._id});
             }
         }
 
@@ -305,6 +313,9 @@ namespace WindowsFormsAppTest
                     MessageBox.Show("New order truck is add successfully.", "Message");
                     this.clearOrderTruckTab();
                     this.displayDataTableOrderTruck(dataGridViewOrderTruck);
+                    this.loadValueCustomeFilterCombobox(cbbSearchCustomer);
+                    this.loadValueFilterMaterialTypeCombobox(cbbSearchMaterialType);
+                    this.resetFilterValue();
                 }
                 catch (Exception)
                 {
@@ -476,6 +487,9 @@ namespace WindowsFormsAppTest
                         selectedOrderTruck = String.Empty;
                         this.clearOrderTruckTab();
                         this.displayDataTableOrderTruck(dataGridViewOrderTruck);
+                        this.loadValueCustomeFilterCombobox(cbbSearchCustomer);
+                        this.loadValueFilterMaterialTypeCombobox(cbbSearchMaterialType);
+                        this.resetFilterValue();
                     }
                     catch (Exception)
                     {
@@ -571,7 +585,39 @@ namespace WindowsFormsAppTest
 
         private void btnDeleteOrderTruck_Click(object sender, EventArgs e)
         {
-            this.clearOrderTruckTab();
+            if (!String.IsNullOrEmpty(selectedOrderTruck))
+            {
+
+                if (cbbCustomer.SelectedIndex < 0 || cbbMaterialType.SelectedIndex < 0 || String.IsNullOrEmpty(txtSubTotal.Text))
+                {
+                    MessageBox.Show("Please select the ordertruck to delete.", "Message");
+                }
+                else
+                {
+                    try
+                    {
+                        MongoDBConnection mongoDBConnection = MongoDBConnection.getMongoConnection;
+                        OrderTruck deleteOrderTruck = new OrderTruck();
+                        deleteOrderTruck.deleteOrderTruck(mongoDBConnection.getMongoData(), selectedOrderTruck);
+                        MessageBox.Show("Order truck is deleted successfully.", "Message");                     
+                        this.clearOrderTruckTab();
+                        this.displayDataTableOrderTruck(dataGridViewOrderTruck);
+                        this.loadValueCustomeFilterCombobox(cbbSearchCustomer);
+                        this.loadValueFilterMaterialTypeCombobox(cbbSearchMaterialType);
+                        this.resetFilterValue();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Failed to delete the customer. Please try again.", "Message");
+                    }
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select the customer to delete.", "Message");
+            }
+           
         }
 
 
@@ -587,14 +633,14 @@ namespace WindowsFormsAppTest
 
         private void cbbCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // this.loadValueCustomerCombobox(cbbCustomer);
-            Console.WriteLine(cbbCustomer.SelectedItem.ToString());
 
         }
 
         private void tabOrderTruck_Click(object sender, EventArgs e)
         {
             this.loadValueCustomerCombobox(cbbCustomer);
+            this.loadValueCustomeFilterCombobox(cbbSearchCustomer);
+            this.loadValueFilterMaterialTypeCombobox(cbbSearchMaterialType);
         }
         public void loadValueCustomerCombobox(ComboBox customerCombobox)
         {
@@ -606,6 +652,28 @@ namespace WindowsFormsAppTest
             foreach (Customer customer1 in listCustomers)
             {
                 cbbCustomer.Items.Add(customer1.name);
+            }
+        }
+        public void loadValueCustomeFilterCombobox (ComboBox customerCombobox)
+        {
+            cbbSearchCustomer.Items.Clear();
+            cbbSearchCustomer.ResetText();
+            cbbSearchCustomer.Items.Add(" ");
+            var list = listOrderTrucksFilter.GroupBy(i => i.customer._id).Select(g => g.First()).ToList();
+            foreach(OrderTruck orderTruck in list)
+            {
+                cbbSearchCustomer.Items.Add(orderTruck.customer.name);
+            }              
+        }
+        public void loadValueFilterMaterialTypeCombobox (ComboBox materialTypeCombobox)
+        {
+            cbbSearchMaterialType.Items.Clear();
+            cbbSearchMaterialType.ResetText();
+            var listMaterialType = listOrderTrucksFilter.GroupBy(i => i.materialType).Select(g => g.First()).ToList();
+            cbbSearchMaterialType.Items.Add(" ");
+            foreach (OrderTruck orderTruck in listMaterialType)
+            {
+                cbbSearchMaterialType.Items.Add(orderTruck.materialType);
             }
         }
         public void loadValueMaterialTypeCombobox(ComboBox materialTypeCombobox)
@@ -645,10 +713,10 @@ namespace WindowsFormsAppTest
         private void dateTPStartDay_ValueChanged(object sender, EventArgs e)
         {
             dateTPStartDay.CustomFormat = "dd/MM/yyyy";
-            startDayFilter = dateTPStartDay.Value.ToUniversalTime();
-            startDayFilter = Convert.ToDateTime(startDayFilter.ToString("dd/MM/yyyy"));
-            Console.WriteLine("StartDay: ");
-            Console.WriteLine(startDayFilter);
+            startDayFilter = dateTPStartDay.Value.ToLocalTime();
+            startDayFilter = new DateTime(startDayFilter.Year, startDayFilter.Month, startDayFilter.Day, 0, 0, 0);
+            Console.WriteLine(startDayFilter.ToString("dd/MM/yyyy"));
+            // startDayFilter = Convert.ToDateTime(startDayFilter.ToString("dd/MM/yyyy"));
         }
 
         private void dateTPEnday_ValueChanged(object sender, EventArgs e)
@@ -656,10 +724,10 @@ namespace WindowsFormsAppTest
             // DateTime date = DateTime.ParseExact(dateTPEnday.Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null);
             // Console.WriteLine(date.ToUniversalTime().ToString());
             dateTPEnday.CustomFormat = "dd/MM/yyyy";
-            endDayFilter = dateTPEnday.Value.ToUniversalTime();
-            endDayFilter = Convert.ToDateTime(endDayFilter.ToString("dd/MM/yyyy"));
-            Console.WriteLine("EndDay: ");
-            Console.WriteLine(endDayFilter);
+            endDayFilter = dateTPEnday.Value.ToLocalTime();
+            endDayFilter = new DateTime(endDayFilter.Year, endDayFilter.Month, endDayFilter.Day, 23, 59, 59);
+            Console.WriteLine(DateTime.ParseExact(endDayFilter.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null));
+            // endDayFilter = Convert.ToDateTime(endDayFilter.ToString("dd/MM/yyyy"));
         }
 
         private void dateTPCompletedDay_ValueChanged(object sender, EventArgs e)
@@ -670,36 +738,48 @@ namespace WindowsFormsAppTest
         private void btnSearch_Click(object sender, EventArgs e)
         {
             List<OrderTruck> resultFilter = new List<OrderTruck>();
-            if (cbbSearchCustomer.SelectedIndex >= 0)
+            if (cbbSearchCustomer.SelectedIndex  <= 0 && cbbSearchMaterialType.SelectedIndex <= 0
+                && !ckcSearchPaid.Checked && !ckcfilterByDay.Checked)
             {
-                resultFilter = listOrderTrucksFilter.Where(orderTruck => orderTruck.customer.name
-                .Equals(cbbSearchCustomer.SelectedItem.ToString().Trim()))
-                .Cast<OrderTruck>().ToList();
-            }
-            if (cbbSearchMaterialType.SelectedIndex >= 0)
+                this.viewDataTableOrdertruck(dataGridViewOrderTruck, listOrderTrucksFilter);
+                MessageBox.Show("Please select one option at least to filter. ", "Message");
+            } else
             {
-                resultFilter = resultFilter.Where(orderTruck => orderTruck.materialType
-                .Equals(cbbSearchMaterialType.SelectedItem.ToString().Trim()))
-                .Cast<OrderTruck>().ToList();
-
-            }
-            if (ckcSearchPaid.Checked)
-            {
-                resultFilter = resultFilter.Where(orderTruck => orderTruck.isPaid).
-                    Cast<OrderTruck>().ToList();
-            }
-            if (ckcfilterByDay.Checked)
-            {
-                if (startDayFilter > endDayFilter)
-                {
-                    MessageBox.Show("End time must be greater than Start time.", "Message");
-                } else
-                {
-                    resultFilter = listOrderTrucksFilter.Where(orderTruck => (Convert.ToDateTime(orderTruck.completedDate.ToString("dd/MM/yyyy")) >= startDayFilter) &&
-                    Convert.ToDateTime(orderTruck.completedDate.ToString("dd/MM/yyyy")) <= endDayFilter)
-                        .Cast<OrderTruck>().ToList();
+                resultFilter = listOrderTrucksFilter;
+                if (cbbSearchCustomer.SelectedIndex > 0)
+                {                
+                    resultFilter = resultFilter.Where(orderTruck => orderTruck.customer.name
+                    .Equals(cbbSearchCustomer.SelectedItem.ToString().Trim()))
+                    .Cast<OrderTruck>().ToList();
                 }
+                if (cbbSearchMaterialType.SelectedIndex > 0)
+                {
+                    resultFilter = resultFilter.Where(orderTruck => orderTruck.materialType
+                    .Equals(cbbSearchMaterialType.SelectedItem.ToString().Trim()))
+                    .Cast<OrderTruck>().ToList();
+
+                }
+                if (ckcSearchPaid.Checked)
+                {
+                    resultFilter = resultFilter.Where(orderTruck => orderTruck.isPaid).
+                        Cast<OrderTruck>().ToList();
+                }
+                if (ckcfilterByDay.Checked)
+                {
+                    if (startDayFilter > endDayFilter)
+                    {
+                        MessageBox.Show("End time must be greater than Start time.", "Message");
+                    }
+                    else
+                    {
+                        resultFilter = resultFilter.Where(orderTruck => (orderTruck.completedDate.ToLocalTime() >= startDayFilter) &&
+                        orderTruck.completedDate.ToLocalTime() <= endDayFilter)
+                            .Cast<OrderTruck>().ToList();
+                    }
+                }
+                this.viewDataTableOrdertruck(dataGridViewOrderTruck, resultFilter);
             }
+            
         }
         public void exportToExcel(DataGridView dataGridView)
         {
@@ -708,7 +788,7 @@ namespace WindowsFormsAppTest
             Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
             try
             {
-                excel.Visible = true;
+                excel.Visible = false;
                 worksheet = workbook.ActiveSheet;
                 worksheet.Name = "ExportedFromDatGrid";
                 for (int i = 0; i < dataGridView.Columns.Count; i++)
@@ -747,11 +827,58 @@ namespace WindowsFormsAppTest
                 MessageBox.Show(e.Message);
             } finally
             {
-                excel.Quit();
+               // excel.Quit();
                 workbook = null;
                 excel = null;
             }
         }
 
+        private void ckcfilterByDay_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckcfilterByDay.Checked)
+            {
+                dateTPStartDay.Value = DateTime.Now;
+                dateTPEnday.Value = DateTime.Now;
+            } else
+            {
+                dateTPStartDay.CustomFormat = " " ;
+                dateTPEnday.CustomFormat = " ";
+            }
+        }
+
+        private void cbbSearchCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cbbSearchMaterialType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void resetFilterValue()
+        {
+            cbbSearchCustomer.ResetText();
+            cbbSearchMaterialType.ResetText();
+            if (ckcSearchPaid.Checked)
+            {
+                ckcSearchPaid.Checked = false;
+            }
+            if (ckcfilterByDay.Checked)
+            {
+                ckcfilterByDay.Checked = false;
+            }
+            dateTPStartDay.CustomFormat = " ";
+            dateTPEnday.CustomFormat = " ";
+        }
+
+        private void cbbMaterialType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            this.exportToExcel(dataGridViewOrderTruck);
+        }
     }
 }
