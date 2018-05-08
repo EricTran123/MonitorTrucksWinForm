@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabUser = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -73,6 +73,7 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.tabOrderTruck = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.btnExport = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.cbbSearchMaterialType = new System.Windows.Forms.ComboBox();
@@ -84,6 +85,15 @@
             this.dateTPStartDay = new System.Windows.Forms.DateTimePicker();
             this.ckcSearchPaid = new System.Windows.Forms.CheckBox();
             this.dataGridViewOrderTruck = new System.Windows.Forms.DataGridView();
+            this.idOrderTruck = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.materialType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.note = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.completedDateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modifyDateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Paid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.idMongoOrderTruck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnDeleteOrderTruck = new System.Windows.Forms.Button();
             this.btnUpdateOrderTruck = new System.Windows.Forms.Button();
@@ -101,16 +111,6 @@
             this.lblMaterialType = new System.Windows.Forms.Label();
             this.lblCustomerName = new System.Windows.Forms.Label();
             this.cbbCustomer = new System.Windows.Forms.ComboBox();
-            this.idOrderTruck = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.materialType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.note = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.completedDateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modifyDateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Paid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.idMongoOrderTruck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.btnExport = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabUser.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -268,14 +268,14 @@
             this.dataGridViewUser.Location = new System.Drawing.Point(23, 243);
             this.dataGridViewUser.Name = "dataGridViewUser";
             this.dataGridViewUser.ReadOnly = true;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewUser.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewUser.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewUser.Size = new System.Drawing.Size(876, 287);
             this.dataGridViewUser.TabIndex = 0;
             this.dataGridViewUser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUser_CellClick);
@@ -559,6 +559,16 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Search";
             // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(1000, 28);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.TabIndex = 10;
+            this.btnExport.Text = "Export";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -656,14 +666,14 @@
             // 
             // dataGridViewOrderTruck
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewOrderTruck.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewOrderTruck.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewOrderTruck.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewOrderTruck.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idOrderTruck,
@@ -675,20 +685,82 @@
             this.modifyDateOrder,
             this.Paid,
             this.idMongoOrderTruck});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewOrderTruck.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewOrderTruck.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewOrderTruck.Location = new System.Drawing.Point(10, 313);
             this.dataGridViewOrderTruck.Name = "dataGridViewOrderTruck";
             this.dataGridViewOrderTruck.RowHeadersWidth = 50;
             this.dataGridViewOrderTruck.Size = new System.Drawing.Size(1042, 257);
             this.dataGridViewOrderTruck.TabIndex = 2;
             this.dataGridViewOrderTruck.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewOrderTruck_CellClick);
+            // 
+            // idOrderTruck
+            // 
+            this.idOrderTruck.HeaderText = "ID";
+            this.idOrderTruck.Name = "idOrderTruck";
+            this.idOrderTruck.ReadOnly = true;
+            this.idOrderTruck.Width = 60;
+            // 
+            // customer
+            // 
+            this.customer.HeaderText = "Customer";
+            this.customer.Name = "customer";
+            this.customer.ReadOnly = true;
+            this.customer.Width = 120;
+            // 
+            // materialType
+            // 
+            this.materialType.HeaderText = "MaterialTypes";
+            this.materialType.Name = "materialType";
+            this.materialType.ReadOnly = true;
+            this.materialType.Width = 120;
+            // 
+            // note
+            // 
+            this.note.HeaderText = "Note";
+            this.note.Name = "note";
+            this.note.ReadOnly = true;
+            this.note.Width = 200;
+            // 
+            // subTotal
+            // 
+            this.subTotal.HeaderText = "SubTotal";
+            this.subTotal.Name = "subTotal";
+            this.subTotal.ReadOnly = true;
+            this.subTotal.Width = 120;
+            // 
+            // completedDateOrder
+            // 
+            this.completedDateOrder.HeaderText = "Completed Date";
+            this.completedDateOrder.Name = "completedDateOrder";
+            this.completedDateOrder.ReadOnly = true;
+            this.completedDateOrder.Width = 135;
+            // 
+            // modifyDateOrder
+            // 
+            this.modifyDateOrder.HeaderText = "ModifyDate";
+            this.modifyDateOrder.Name = "modifyDateOrder";
+            this.modifyDateOrder.ReadOnly = true;
+            this.modifyDateOrder.Width = 135;
+            // 
+            // Paid
+            // 
+            this.Paid.HeaderText = "Paid";
+            this.Paid.Name = "Paid";
+            this.Paid.ReadOnly = true;
+            // 
+            // idMongoOrderTruck
+            // 
+            this.idMongoOrderTruck.HeaderText = "idMongoOrderTruck";
+            this.idMongoOrderTruck.Name = "idMongoOrderTruck";
+            this.idMongoOrderTruck.ReadOnly = true;
+            this.idMongoOrderTruck.Visible = false;
             // 
             // groupBox6
             // 
@@ -868,78 +940,6 @@
             this.cbbCustomer.TabIndex = 0;
             this.cbbCustomer.SelectedIndexChanged += new System.EventHandler(this.cbbCustomer_SelectedIndexChanged);
             // 
-            // idOrderTruck
-            // 
-            this.idOrderTruck.HeaderText = "ID";
-            this.idOrderTruck.Name = "idOrderTruck";
-            this.idOrderTruck.ReadOnly = true;
-            this.idOrderTruck.Width = 60;
-            // 
-            // customer
-            // 
-            this.customer.HeaderText = "Customer";
-            this.customer.Name = "customer";
-            this.customer.ReadOnly = true;
-            this.customer.Width = 120;
-            // 
-            // materialType
-            // 
-            this.materialType.HeaderText = "MaterialTypes";
-            this.materialType.Name = "materialType";
-            this.materialType.ReadOnly = true;
-            this.materialType.Width = 120;
-            // 
-            // note
-            // 
-            this.note.HeaderText = "Note";
-            this.note.Name = "note";
-            this.note.ReadOnly = true;
-            this.note.Width = 200;
-            // 
-            // subTotal
-            // 
-            this.subTotal.HeaderText = "SubTotal";
-            this.subTotal.Name = "subTotal";
-            this.subTotal.ReadOnly = true;
-            this.subTotal.Width = 120;
-            // 
-            // completedDateOrder
-            // 
-            this.completedDateOrder.HeaderText = "Completed Date";
-            this.completedDateOrder.Name = "completedDateOrder";
-            this.completedDateOrder.ReadOnly = true;
-            this.completedDateOrder.Width = 135;
-            // 
-            // modifyDateOrder
-            // 
-            this.modifyDateOrder.HeaderText = "ModifyDate";
-            this.modifyDateOrder.Name = "modifyDateOrder";
-            this.modifyDateOrder.ReadOnly = true;
-            this.modifyDateOrder.Width = 135;
-            // 
-            // Paid
-            // 
-            this.Paid.HeaderText = "Paid";
-            this.Paid.Name = "Paid";
-            this.Paid.ReadOnly = true;
-            // 
-            // idMongoOrderTruck
-            // 
-            this.idMongoOrderTruck.HeaderText = "idMongoOrderTruck";
-            this.idMongoOrderTruck.Name = "idMongoOrderTruck";
-            this.idMongoOrderTruck.ReadOnly = true;
-            this.idMongoOrderTruck.Visible = false;
-            // 
-            // btnExport
-            // 
-            this.btnExport.Location = new System.Drawing.Point(1000, 28);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(75, 23);
-            this.btnExport.TabIndex = 10;
-            this.btnExport.Text = "Export";
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -948,7 +948,7 @@
             this.Controls.Add(this.tabControl);
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form2";
+            this.Text = "Monitor Trucks System";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.tabControl.ResumeLayout(false);
             this.tabUser.ResumeLayout(false);
