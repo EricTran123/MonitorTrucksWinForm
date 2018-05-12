@@ -29,8 +29,20 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabUser = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -55,14 +67,6 @@
             this.btnUpdateCustomer = new System.Windows.Forms.Button();
             this.btnAddCustomer = new System.Windows.Forms.Button();
             this.dataGridViewCustomer = new System.Windows.Forms.DataGridView();
-            this.idCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createDateCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modifyDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isActiveCustomer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.idMongoDB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.ckcActiveCustomer = new System.Windows.Forms.CheckBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
@@ -85,15 +89,6 @@
             this.dateTPStartDay = new System.Windows.Forms.DateTimePicker();
             this.ckcSearchPaid = new System.Windows.Forms.CheckBox();
             this.dataGridViewOrderTruck = new System.Windows.Forms.DataGridView();
-            this.idOrderTruck = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.materialType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.note = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.completedDateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modifyDateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Paid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.idMongoOrderTruck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnDeleteOrderTruck = new System.Windows.Forms.Button();
             this.btnUpdateOrderTruck = new System.Windows.Forms.Button();
@@ -111,6 +106,23 @@
             this.lblMaterialType = new System.Windows.Forms.Label();
             this.lblCustomerName = new System.Windows.Forms.Label();
             this.cbbCustomer = new System.Windows.Forms.ComboBox();
+            this.idOrderTruck = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.materialType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.note = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.completedDateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modifyDateOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Paid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.idMongoOrderTruck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.idCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createDateCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modifyDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isActiveCustomer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.idMongoDB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabUser.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -138,6 +150,7 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1169, 599);
             this.tabControl.TabIndex = 0;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.orderTruckSelected);
             // 
             // tabUser
             // 
@@ -388,70 +401,6 @@
             this.dataGridViewCustomer.TabIndex = 1;
             this.dataGridViewCustomer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCustomer_CellClick);
             // 
-            // idCustomer
-            // 
-            this.idCustomer.Frozen = true;
-            this.idCustomer.HeaderText = "ID";
-            this.idCustomer.Name = "idCustomer";
-            this.idCustomer.ReadOnly = true;
-            this.idCustomer.Width = 80;
-            // 
-            // customerName
-            // 
-            this.customerName.Frozen = true;
-            this.customerName.HeaderText = "Name";
-            this.customerName.Name = "customerName";
-            this.customerName.ReadOnly = true;
-            // 
-            // phoneNumber
-            // 
-            this.phoneNumber.Frozen = true;
-            this.phoneNumber.HeaderText = "Phone Number";
-            this.phoneNumber.Name = "phoneNumber";
-            this.phoneNumber.ReadOnly = true;
-            this.phoneNumber.Width = 150;
-            // 
-            // address
-            // 
-            this.address.Frozen = true;
-            this.address.HeaderText = "Address";
-            this.address.Name = "address";
-            this.address.ReadOnly = true;
-            this.address.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.address.Width = 200;
-            // 
-            // createDateCustomer
-            // 
-            this.createDateCustomer.Frozen = true;
-            this.createDateCustomer.HeaderText = "CreateDate";
-            this.createDateCustomer.Name = "createDateCustomer";
-            this.createDateCustomer.ReadOnly = true;
-            this.createDateCustomer.Width = 150;
-            // 
-            // modifyDate
-            // 
-            this.modifyDate.Frozen = true;
-            this.modifyDate.HeaderText = "ModifyDate";
-            this.modifyDate.Name = "modifyDate";
-            this.modifyDate.ReadOnly = true;
-            this.modifyDate.Width = 150;
-            // 
-            // isActiveCustomer
-            // 
-            this.isActiveCustomer.Frozen = true;
-            this.isActiveCustomer.HeaderText = "Active";
-            this.isActiveCustomer.Name = "isActiveCustomer";
-            this.isActiveCustomer.ReadOnly = true;
-            this.isActiveCustomer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // idMongoDB
-            // 
-            this.idMongoDB.Frozen = true;
-            this.idMongoDB.HeaderText = "idMongoDB";
-            this.idMongoDB.Name = "idMongoDB";
-            this.idMongoDB.ReadOnly = true;
-            this.idMongoDB.Visible = false;
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.ckcActiveCustomer);
@@ -666,14 +615,14 @@
             // 
             // dataGridViewOrderTruck
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewOrderTruck.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)), true);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewOrderTruck.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewOrderTruck.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewOrderTruck.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idOrderTruck,
@@ -685,82 +634,20 @@
             this.modifyDateOrder,
             this.Paid,
             this.idMongoOrderTruck});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewOrderTruck.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewOrderTruck.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridViewOrderTruck.Location = new System.Drawing.Point(10, 313);
             this.dataGridViewOrderTruck.Name = "dataGridViewOrderTruck";
             this.dataGridViewOrderTruck.RowHeadersWidth = 50;
             this.dataGridViewOrderTruck.Size = new System.Drawing.Size(1042, 257);
             this.dataGridViewOrderTruck.TabIndex = 2;
             this.dataGridViewOrderTruck.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewOrderTruck_CellClick);
-            // 
-            // idOrderTruck
-            // 
-            this.idOrderTruck.HeaderText = "ID";
-            this.idOrderTruck.Name = "idOrderTruck";
-            this.idOrderTruck.ReadOnly = true;
-            this.idOrderTruck.Width = 60;
-            // 
-            // customer
-            // 
-            this.customer.HeaderText = "Customer";
-            this.customer.Name = "customer";
-            this.customer.ReadOnly = true;
-            this.customer.Width = 120;
-            // 
-            // materialType
-            // 
-            this.materialType.HeaderText = "MaterialTypes";
-            this.materialType.Name = "materialType";
-            this.materialType.ReadOnly = true;
-            this.materialType.Width = 120;
-            // 
-            // note
-            // 
-            this.note.HeaderText = "Note";
-            this.note.Name = "note";
-            this.note.ReadOnly = true;
-            this.note.Width = 200;
-            // 
-            // subTotal
-            // 
-            this.subTotal.HeaderText = "SubTotal";
-            this.subTotal.Name = "subTotal";
-            this.subTotal.ReadOnly = true;
-            this.subTotal.Width = 120;
-            // 
-            // completedDateOrder
-            // 
-            this.completedDateOrder.HeaderText = "Completed Date";
-            this.completedDateOrder.Name = "completedDateOrder";
-            this.completedDateOrder.ReadOnly = true;
-            this.completedDateOrder.Width = 135;
-            // 
-            // modifyDateOrder
-            // 
-            this.modifyDateOrder.HeaderText = "ModifyDate";
-            this.modifyDateOrder.Name = "modifyDateOrder";
-            this.modifyDateOrder.ReadOnly = true;
-            this.modifyDateOrder.Width = 135;
-            // 
-            // Paid
-            // 
-            this.Paid.HeaderText = "Paid";
-            this.Paid.Name = "Paid";
-            this.Paid.ReadOnly = true;
-            // 
-            // idMongoOrderTruck
-            // 
-            this.idMongoOrderTruck.HeaderText = "idMongoOrderTruck";
-            this.idMongoOrderTruck.Name = "idMongoOrderTruck";
-            this.idMongoOrderTruck.ReadOnly = true;
-            this.idMongoOrderTruck.Visible = false;
             // 
             // groupBox6
             // 
@@ -877,6 +764,7 @@
             this.txtSubTotal.Name = "txtSubTotal";
             this.txtSubTotal.Size = new System.Drawing.Size(136, 22);
             this.txtSubTotal.TabIndex = 7;
+            this.txtSubTotal.TextChanged += new System.EventHandler(this.txtSubTotal_TextChanged);
             // 
             // lblSubTotal
             // 
@@ -940,12 +828,170 @@
             this.cbbCustomer.TabIndex = 0;
             this.cbbCustomer.SelectedIndexChanged += new System.EventHandler(this.cbbCustomer_SelectedIndexChanged);
             // 
+            // idOrderTruck
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.idOrderTruck.DefaultCellStyle = dataGridViewCellStyle9;
+            this.idOrderTruck.HeaderText = "ID";
+            this.idOrderTruck.Name = "idOrderTruck";
+            this.idOrderTruck.ReadOnly = true;
+            this.idOrderTruck.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.idOrderTruck.Width = 60;
+            // 
+            // customer
+            // 
+            this.customer.HeaderText = "Customer";
+            this.customer.Name = "customer";
+            this.customer.ReadOnly = true;
+            this.customer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.customer.Width = 120;
+            // 
+            // materialType
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.materialType.DefaultCellStyle = dataGridViewCellStyle10;
+            this.materialType.HeaderText = "MaterialTypes";
+            this.materialType.Name = "materialType";
+            this.materialType.ReadOnly = true;
+            this.materialType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.materialType.Width = 120;
+            // 
+            // note
+            // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.note.DefaultCellStyle = dataGridViewCellStyle11;
+            this.note.HeaderText = "Note";
+            this.note.Name = "note";
+            this.note.ReadOnly = true;
+            this.note.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.note.Width = 200;
+            // 
+            // subTotal
+            // 
+            this.subTotal.HeaderText = "SubTotal";
+            this.subTotal.Name = "subTotal";
+            this.subTotal.ReadOnly = true;
+            this.subTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.subTotal.Width = 120;
+            // 
+            // completedDateOrder
+            // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.completedDateOrder.DefaultCellStyle = dataGridViewCellStyle12;
+            this.completedDateOrder.HeaderText = "Completed Date";
+            this.completedDateOrder.Name = "completedDateOrder";
+            this.completedDateOrder.ReadOnly = true;
+            this.completedDateOrder.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.completedDateOrder.Width = 135;
+            // 
+            // modifyDateOrder
+            // 
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.modifyDateOrder.DefaultCellStyle = dataGridViewCellStyle13;
+            this.modifyDateOrder.HeaderText = "ModifyDate";
+            this.modifyDateOrder.Name = "modifyDateOrder";
+            this.modifyDateOrder.ReadOnly = true;
+            this.modifyDateOrder.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.modifyDateOrder.Width = 135;
+            // 
+            // Paid
+            // 
+            this.Paid.HeaderText = "Paid";
+            this.Paid.Name = "Paid";
+            this.Paid.ReadOnly = true;
+            // 
+            // idMongoOrderTruck
+            // 
+            this.idMongoOrderTruck.HeaderText = "idMongoOrderTruck";
+            this.idMongoOrderTruck.Name = "idMongoOrderTruck";
+            this.idMongoOrderTruck.ReadOnly = true;
+            this.idMongoOrderTruck.Visible = false;
+            // 
+            // idCustomer
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.idCustomer.DefaultCellStyle = dataGridViewCellStyle2;
+            this.idCustomer.Frozen = true;
+            this.idCustomer.HeaderText = "ID";
+            this.idCustomer.Name = "idCustomer";
+            this.idCustomer.ReadOnly = true;
+            this.idCustomer.Width = 80;
+            // 
+            // customerName
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.customerName.DefaultCellStyle = dataGridViewCellStyle3;
+            this.customerName.Frozen = true;
+            this.customerName.HeaderText = "Name";
+            this.customerName.Name = "customerName";
+            this.customerName.ReadOnly = true;
+            // 
+            // phoneNumber
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.phoneNumber.DefaultCellStyle = dataGridViewCellStyle4;
+            this.phoneNumber.Frozen = true;
+            this.phoneNumber.HeaderText = "Phone Number";
+            this.phoneNumber.Name = "phoneNumber";
+            this.phoneNumber.ReadOnly = true;
+            this.phoneNumber.Width = 150;
+            // 
+            // address
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.address.DefaultCellStyle = dataGridViewCellStyle5;
+            this.address.Frozen = true;
+            this.address.HeaderText = "Address";
+            this.address.Name = "address";
+            this.address.ReadOnly = true;
+            this.address.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.address.Width = 200;
+            // 
+            // createDateCustomer
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.createDateCustomer.DefaultCellStyle = dataGridViewCellStyle6;
+            this.createDateCustomer.Frozen = true;
+            this.createDateCustomer.HeaderText = "CreateDate";
+            this.createDateCustomer.Name = "createDateCustomer";
+            this.createDateCustomer.ReadOnly = true;
+            this.createDateCustomer.Width = 150;
+            // 
+            // modifyDate
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.modifyDate.DefaultCellStyle = dataGridViewCellStyle7;
+            this.modifyDate.Frozen = true;
+            this.modifyDate.HeaderText = "ModifyDate";
+            this.modifyDate.Name = "modifyDate";
+            this.modifyDate.ReadOnly = true;
+            this.modifyDate.Width = 150;
+            // 
+            // isActiveCustomer
+            // 
+            this.isActiveCustomer.Frozen = true;
+            this.isActiveCustomer.HeaderText = "Active";
+            this.isActiveCustomer.Name = "isActiveCustomer";
+            this.isActiveCustomer.ReadOnly = true;
+            this.isActiveCustomer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // idMongoDB
+            // 
+            this.idMongoDB.Frozen = true;
+            this.idMongoDB.HeaderText = "idMongoDB";
+            this.idMongoDB.Name = "idMongoDB";
+            this.idMongoDB.ReadOnly = true;
+            this.idMongoDB.Visible = false;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1204, 600);
             this.Controls.Add(this.tabControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Monitor Trucks System";
@@ -1009,14 +1055,6 @@
         private System.Windows.Forms.Button btnDeleteCustomer;
         private System.Windows.Forms.Button btnUpdateCustomer;
         private System.Windows.Forms.Button btnAddCustomer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idCustomer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn address;
-        private System.Windows.Forms.DataGridViewTextBoxColumn createDateCustomer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn modifyDate;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isActiveCustomer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idMongoDB;
         private System.Windows.Forms.DataGridView dataGridViewOrderTruck;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -1046,6 +1084,7 @@
         private System.Windows.Forms.ComboBox cbbSearchCustomer;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.DataGridViewTextBoxColumn idOrderTruck;
         private System.Windows.Forms.DataGridViewTextBoxColumn customer;
         private System.Windows.Forms.DataGridViewTextBoxColumn materialType;
@@ -1055,6 +1094,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn modifyDateOrder;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Paid;
         private System.Windows.Forms.DataGridViewCheckBoxColumn idMongoOrderTruck;
-        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createDateCustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn modifyDate;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isActiveCustomer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idMongoDB;
     }
 }

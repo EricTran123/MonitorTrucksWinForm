@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using WindowsFormsAppTest.Model;
 using MongoDB.Driver;
 using WindowsFormsAppTest.Database;
+using System.Text.RegularExpressions;
 
 namespace WindowsFormsAppTest
 {
@@ -90,9 +91,12 @@ namespace WindowsFormsAppTest
             for (int i = 0; i < listCustomers.Count; i++)
             {
                 dataGridViewCustomer.Rows.Add(new object[] { i + 1, listCustomers[i].name, listCustomers[i].phoneNumber, listCustomers[i].address,
-                listCustomers[i].createDate.ToLocalTime(), listCustomers[i].modifyDate.ToLocalTime(), listCustomers[i].isActive, listCustomers[i]._id });
+                listCustomers[i].createDate.ToLocalTime().ToString("dd/MM/yyyy"), listCustomers[i].modifyDate.ToLocalTime().ToString("dd/MM/yyyy"), listCustomers[i].isActive, listCustomers[i]._id });
             }
-            Console.WriteLine(dataGridViewCustomer.ColumnCount);
+            for (int i = 0; i < dataGridView.ColumnCount; i++)
+            {
+                dataGridView.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
         }
         public void displayDataTableOrderTruck(DataGridView dataGridView)
         {
@@ -111,6 +115,10 @@ namespace WindowsFormsAppTest
             {
                 dataGridView.Rows.Add(new object[] { i + 1, listOrderTrucks[i].customer.name, listOrderTrucks[i].materialType, listOrderTrucks[i].note,
                     listOrderTrucks[i].subtotal,listOrderTrucks[i].completedDate.ToLocalTime().ToString("dd/MM/yyyy"),listOrderTrucks[i].modifyDate.ToLocalTime().ToString("dd/MM/yyyy"), listOrderTrucks[i].isPaid,listOrderTrucks[i]._id});
+            }
+            for (int i = 0; i < dataGridView.ColumnCount; i++)
+            {
+                dataGridView.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
         }
 
@@ -791,11 +799,30 @@ namespace WindowsFormsAppTest
                 excel.Visible = false;
                 worksheet = workbook.ActiveSheet;
                 worksheet.Name = "ExportedFromDatGrid";
+                Microsoft.Office.Interop.Excel.Range formatRange = worksheet.UsedRange;
                 for (int i = 0; i < dataGridView.Columns.Count; i++)
                 {
+
                     if (dataGridView.Columns[i].Visible)
                     {
                         worksheet.Cells[1, i + 1] = dataGridView.Columns[i].HeaderText;
+                        if (dataGridView.Columns[i].HeaderText.Contains("Note"))
+                        {
+                            Microsoft.Office.Interop.Excel.Range noteHeader = worksheet.get_Range("D1", "D1");
+                            noteHeader.ColumnWidth = 20.0;
+                        } else if(dataGridView.Columns[i].HeaderText.Equals("Paid")) {
+                            Microsoft.Office.Interop.Excel.Range paidHeader = worksheet.get_Range("H1", "H1");
+                            paidHeader.ColumnWidth = 7.0;
+                        } else
+                        {
+                            worksheet.Columns.AutoFit();
+                        }         
+                        worksheet.Cells[1, i + 1].Font.Bold = true;
+                        worksheet.Cells[1, i + 1].Font.Size = 12;
+                        Microsoft.Office.Interop.Excel.Range cell = formatRange.Cells[1, i + 1];
+                        Microsoft.Office.Interop.Excel.Borders border = cell.Borders;
+                        border.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+                        border.Weight = 2d;
                     }    
                 }
                 for (int i = 0; i < dataGridView.Rows.Count; i++)
@@ -804,13 +831,19 @@ namespace WindowsFormsAppTest
                     {
                        if (dataGridView.Columns[i].Visible)
                         {
-                            if (dataGridView.Rows[i].Cells[j].Value != null)
+                            if (dataGridView.Rows[i].Cells[j].Displayed)
                             {
-                                worksheet.Cells[i + 2, j + 1] = dataGridView.Rows[i].Cells[j].Value.ToString();
-                            } else
-                            {
-                                worksheet.Cells[i + 2, j + 1] = "";
+                                if (dataGridView.Rows[i].Cells[j].Value != null)
+                                {
+                                    worksheet.Cells[i + 2, j + 1] = dataGridView.Rows[i].Cells[j].Value.ToString();
+                                    formatRange.Font.Size = 10;
+                                }
+                                else
+                                {
+                                    worksheet.Cells[i + 2, j + 1] = "";
+                                }
                             }
+                           
                         }
                     }
                 }
@@ -827,7 +860,7 @@ namespace WindowsFormsAppTest
                 MessageBox.Show(e.Message);
             } finally
             {
-               // excel.Quit();
+                excel.Quit();
                 workbook = null;
                 excel = null;
             }
@@ -880,5 +913,24 @@ namespace WindowsFormsAppTest
         {
             this.exportToExcel(dataGridViewOrderTruck);
         }
+
+        private void orderTruckSelected(object sender, EventArgs e)
+        {
+            this.loadValueCustomeFilterCombobox(cbbSearchCustomer);
+            this.loadValueFilterMaterialTypeCombobox(cbbSearchMaterialType);
+            this.resetFilterValue();
+        }
+
+        private void txtSubTotal_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+        private bool KeyEnteredIsValid(string key)
+        {
+            Regex regex;
+            regex = new Regex("[^0-9]+$"); //regex that matches disallowed text
+            return regex.IsMatch(key);
+        }
+
     }
 }
